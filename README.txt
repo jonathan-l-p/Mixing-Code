@@ -7,5 +7,11 @@ The Fortran files are responsible for the main fluid calculations. Velocities u 
 'Makefile' is responsinle for compiling the Fortran code.
 
 INSTRUCTIONS:
+Fluid and computational parameters can be adjusted in 'global_variables.f90'.
+
 Execute 'script_clean' to completely recompile and execute the Fortran code.
 Execute 'script' to run the Fortran code without forcing a recompilation.
+
+To import fluid data into MATLAB, run 'a_importf.m'. Ensure that the export directory 'SavePath' in 'global_variables.f90' matches the import directory of the same name in 'a_importf.m'.
+
+Run 'a_ImPlot.m' to import and plot the data at the same time.
