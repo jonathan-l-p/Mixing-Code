@@ -25,7 +25,7 @@ module global
   real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
   real(dp) :: FSR_u = 10.d0 ! u_{\infinity} / u_{-\infinity}
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
-  real(dp) :: Pr = 1.d0 ! Prandtl number
+  real(dp) :: Pr = 0.7d0 ! Prandtl number
   real(dp) :: strain_ratio = 0.5d0 ! \kappa_{\infinity}(x0ind) L / U_{\infinity}
   real(dp) :: Y1Hp = 1.d0 ! free stream composition of fluid 1 at y = H
   real(dp) :: Y1Hn = 0.d0 ! free stream composition of fluid 1 at y = -H
