@@ -109,30 +109,6 @@ module primarycalcs
       !   kappaStar(Ny,k+1) = kappaStar(1,k+1)/FSR_kappa
       ! endif
 
-      ! y = H zero derivative BC
-      DOY1_Temp = 0.d0
-      DOY2_Temp = (1/(delta_y_Star**2))*(muStar(1,k) + muStar(2,k))&
-      *(kappaStar(2,k) - kappaStar(1,k))
-      Ank_Temp = (strain_ratio*rhoStar(1,k)*(kappaStar(1,k)**2)) &
-      - ((strain_ratio)*(fStar(1,k)**2))
-      ! Ank_Temp = 0.d0
-      Ank_kappa(1,k) = Ank_Temp
-      c_temp = 1.d0 ! c = 1
-      kappaStar(1,k+1) = VARnkp1(kappaStar(1,k), DOY1_Temp, DOY2_Temp, &
-      Ank_Temp, c_temp, 1)
-
-      ! ! y = -H zero derivative BC
-      DOY1_Temp = 0.d0
-      DOY2_Temp = (1/(delta_y_Star**2))*(muStar(Ny,k) + muStar(Ny-1,k))&
-      *(kappaStar(Ny-1,k) - kappaStar(Ny,k))
-      Ank_Temp = (strain_ratio*rhoStar(Ny,k)*(kappaStar(Ny,k)**2)) &
-      - ((strain_ratio)*(fStar(1,k)**2))
-      ! Ank_Temp = 0.d0
-      Ank_kappa(Ny,k) = Ank_Temp
-      c_temp = 1.d0 ! c = 1
-      kappaStar(Ny,k+1) = VARnkp1(kappaStar(Ny,k), DOY1_Temp, DOY2_Temp, &
-      Ank_Temp, c_temp, 1)
-
       do n6 = 2, (Ny - 1)
         DOY1_Temp = DO_CentralY(kappaStar(n6+1,k), kappaStar(n6-1,k))
         DOY2_Temp = DO_CentralY2_mu(kappaStar(n6+1,k), kappaStar(n6,k), &
@@ -148,5 +124,12 @@ module primarycalcs
         kappaStar(n6,k+1) = VARnkp1(kappaStar(n6,k), DOY1_Temp, DOY2_Temp, &
         Ank_Temp, c_temp, n6)
       end do
+
+      ! y = H zero first and second derivative BC
+      kappaStar(1,k+1) = kappaStar(2,k+1)
+
+      ! y = -H zero first and second derivative BC
+      kappaStar(Ny,k+1) = kappaStar(Ny-1,k+1)
+
     end subroutine kappaStarScheme
 end module primarycalcs

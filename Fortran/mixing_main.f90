@@ -123,6 +123,7 @@ program mixing
   VarSave(6,1) = x0ind
   VarSave(7,1) = FSR_U
   VarSave(8,1) = FSR_h
+  VarSave(9,1) = Pr
   call binwritef(VarSave,'out_VarSave.bin')
 
   print*,'Wrote output arrays to .bin files'
