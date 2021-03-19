@@ -9,5 +9,3 @@ The Fortran files are responsible for the main fluid calculations. Velocities u 
 INSTRUCTIONS:
 Execute 'script_clean' to completely recompile and execute the Fortran code.
 Execute 'script' to run the Fortran code without forcing a recompilation.
-
-
