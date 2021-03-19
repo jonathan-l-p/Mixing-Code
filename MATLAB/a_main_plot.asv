@@ -1,7 +1,7 @@
 % a script to define functions for plotting and make plots
 close all
 
-prepath = '/Users/jonathan/Downloads/VariableKappaInf/';
+prepath = '\Users\jonathan\Downloads\VariableKappaInf/';
 SAVEALL = 1;
 
 t1 = ['Pr = ', num2str(Pr), ...
@@ -53,21 +53,21 @@ end
 
 plotxchop5Star(muStar,7)
 xlabel('\mu*')
-title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'mustar(y).png']))
 end
 
 plotxchop5Star(T,8)
 xlabel('T')
-title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'T(y).png']))
 end
 
 plotxchop5Star(kappaStar,9)
 xlabel('\kappa*')
-title(t1)
+title(['\kappa_\infty(x_0) L / U_\infty = ', ...
+    num2str(strain_ratio), ', \kappa_\infty/\kappa_{-\infty} = ', ...
+    num2str(FSR_kappa)])
 if SAVEALL
     saveas(gcf,strcat([prepath,'kappastar(y).png']))
 end

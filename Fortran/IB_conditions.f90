@@ -151,8 +151,8 @@ module IBconditions
       ! ! kappaStar(Ny,1:x0ind) = kappaStar(1,1)/FSR_kappa
       ! kappaStar(Ny,:) = kappaStar(1,:)/FSR_kappa
 
-      ! fStar(1,:) = 1.d0 / (1.d0 + sqrt(XStar(1,:)))
-      fStar(1,:) = 1.d0
+      fStar(1,:) = 1.d0 / (1.d0 + sqrt(XStar(1,:)))
+      ! fStar(1,:) = 1.d0
       ! fStar(1,1:x0ind) = 1.d0
       ! do i = x0ind + 1, Nx
       !   fStar(1,i) = sqrt(xStar(1,x0ind) / xStar(1,i))
