@@ -5,6 +5,9 @@ module global
   implicit none
 
   ! okay to edit - - - - - - -
+  character(len=*), parameter :: &
+  SavePath = '/Users/jonathan/Documents/DataDump/out_Fortran/'
+
   ! integer, parameter :: Nx = 160000
   ! integer, parameter :: Ny = 853
   ! integer, parameter :: Nx = 80000

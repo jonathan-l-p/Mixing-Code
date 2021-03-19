@@ -9,7 +9,7 @@ module binwrite
       character(len=*), intent(in) :: filename
       real(dp), intent(in) :: A(:,:)
 
-      open(unit=100,file=filename,status='replace',access='stream',&
+      open(unit=100,file=SavePath//filename,status='replace',access='stream',&
       form='unformatted')
       write(100)A
     end subroutine binwritef
