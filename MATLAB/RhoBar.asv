@@ -1,0 +1,9 @@
+% Explore the implications of the RhoBar variable
+% \int_0^y   \rho dy'
+
+clear;clc;
+
+load('/Users/jonathan/Documents/DataDump/MATLAB_test_cases/Pr_1d0_SR_2d0_UR_4d0.mat')
+
+% define RhoBar, which is the integral of rho along y at x* = 1
+RhoBar = trapz(Y(:,Nx), )

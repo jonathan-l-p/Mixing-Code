@@ -2,6 +2,7 @@
 ! uses realprecision module
 module binwrite
   use realprecision
+  use global
   implicit none
 
   contains
@@ -18,7 +19,7 @@ module binwrite
       character(len=*), intent(in) :: filename
       integer, intent(in) :: A(:,:)
 
-      open(unit=100,file=filename,status='replace',access='stream',&
+      open(unit=100,file=SavePath//filename,status='replace',access='stream',&
       form='unformatted')
       write(100)A
     end subroutine binwritef_int

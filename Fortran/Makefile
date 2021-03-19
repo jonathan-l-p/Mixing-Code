@@ -10,4 +10,4 @@ main: $(OBJ)
 	$(FC) $(FFLAGS) -o $@ $(OBJ)
 
 clean:
-	rm *.o *.mod main *.bin
+	rm *.o *.mod main
