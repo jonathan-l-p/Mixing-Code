@@ -1,0 +1,131 @@
+program mixing
+  use realprecision
+  use global
+  use meshgen
+  use properties
+  use IBconditions
+  use dimensions
+  use stable
+  use CleanScheme
+  use primarycalcs
+  use binwrite
+  implicit none
+
+  print*,'-----------------------------'
+  print*,'Fluid Mixing Code'
+  print*,'by Jonathan Palafoutas (2021)'
+  print*,'-----------------------------'
+  print*
+
+  ! SETUP ----------------------------------------------------------------------
+  ! ! define dimensionless and relevant constants
+  ! call dimlessConstants()
+
+  ! ! set h (y domain, [-h, h]) to be much greater than the approximated max
+  ! ! mixing layer thickness
+  ! delta_max_approx = L/sqrt((Uhp - Uhn)*RhoHP*L/MuHP)
+  ! h = FS*delta_max_approx
+
+  ! ! find delta_x and delta_y
+  ! delta_x = L/(Nx - 1)
+  ! delta_y = -2.d0*h/(Ny - 1)
+
+  ! now we can find delta_x_Star and delta_y_Star
+  delta_x_Star = 1.d0/(Nx - 1) ! delta_x / L
+  delta_y_Star = -2.d0*F/(Ny-1) ! /sqrt{Re} delta_y / L
+
+  ! ! check if the proposed domain is stable
+  ! call stability_check()
+
+  ! generate mesh
+  call meshgenStarxy()
+
+  ! apply initial and boundary velocities to U
+  call applyIBu()
+  ! no need for applyIBV() because v is 0 at x = 0 and y = 0
+
+  ! apply initial and boundary enthalpy to Enthalpy and EnthalpyStar
+  call applyIBh()
+
+  ! apply initial and boundary compositions to Y1 and Y2
+  call applyIBComp()
+
+  ! apply initial and boundary temperatures to T
+  call applyIBTemp()
+
+  ! apply initial viscosity to Mu
+  call applyIBmu()
+
+  ! apply initial and boundary density to /rho*
+  call applyIBrho()
+
+  ! apply initial and boundary kappa to kappaStar
+  call applyIBkappa()
+
+  ! the domain is now up-to-date with initial and boundary conditions
+
+  ! PRIMARY CALCULATIONS -------------------------------------------------------
+  ! MAIN LOOP
+  if (BuildMain .eqv. .true.) then
+    do k = 1, (Nx-1) ! take a step in x
+      ! we have all the information we need to find Y1, Y2, hstar, and ustar
+      call compScheme()
+
+      if (BreakLoop .eqv. .true.) then
+        print*,'Calculations failed at k =', k
+        print*
+        exit
+      end if
+
+      call hStarScheme()
+      call uStarScheme()
+      call kappaStarScheme()
+
+      ! new vstar needs new density so we must update density at x + delta_x
+      ! update domain quantities
+      call updateDomain()
+
+      ! now we can update vstar
+      call vStarScheme()
+    end do
+
+    print*,'Completed calculations'
+    print*
+  end if
+
+  ! EXPORT ---------------------------------------------------------------------
+  ! write data to binary files in order to analyze in other programs
+  call binwritef(Y1,'out_Y1.bin')
+  call binwritef(Y2,'out_Y2.bin')
+  call binwritef(fStar,'out_fStar.bin')
+  call binwritef(hStar,'out_hStar.bin')
+  call binwritef(kappaStar,'out_kappaStar.bin')
+  call binwritef(mu,'out_mu.bin')
+  call binwritef(muStar,'out_muStar.bin')
+  call binwritef(rhoStar,'out_rhoStar.bin')
+  call binwritef(T,'out_T.bin')
+  call binwritef(uStar,'out_uStar.bin')
+  call binwritef(vStar,'out_vStar.bin')
+  call binwritef(XStar,'out_XStar.bin')
+  call binwritef(YStar,'out_YStar.bin')
+  call binwritef(Y1,'out_Y1.bin')
+  call binwritef(Y2,'out_Y2.bin')
+  call binwritef_int(Nx_ARRAY,'out_Nx.bin')
+  call binwritef_int(Ny_ARRAY,'out_Ny.bin')
+
+  call binwritef(Ank_kappa,'out_Ank_kappa.bin')
+
+  ! VARIABLE SAVES - - - - - - -
+  VarSave(2,1) = delta_x_Star
+  VarSave(3,1) = delta_y_Star
+  VarSave(4,1) = FSR_kappa
+  VarSave(5,1) = strain_ratio
+  VarSave(6,1) = x0ind
+  VarSave(7,1) = FSR_U
+  VarSave(8,1) = FSR_h
+  call binwritef(VarSave,'out_VarSave.bin')
+
+  print*,'Wrote output arrays to .bin files'
+  print*
+
+end program mixing

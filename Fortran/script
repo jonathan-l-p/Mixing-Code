@@ -1,0 +1,13 @@
+clear
+
+echo
+echo "Compiling..."
+echo
+
+make
+
+echo
+echo "Done!"
+echo
+
+./main
