@@ -1,4 +1,6 @@
 
+prepath = '/Users/jonathan/Downloads/OdeSolutions/';
+
 %% import values
 SR = strain_ratio;
 
@@ -9,21 +11,6 @@ kappastar_p_inf_i = kappaStar(1,1);
 rhostar_n_inf = rhoStar(Ny,1);
 ustar_n_inf = uStar(Ny,1);
 kappastar_n_inf_i = kappaStar(Ny,1);
-
-%% define solution
-% c1 = XStar(1,x0ind)/rhostar_p_inf;
-% c2 = (1/4)*(1/SR)*ustar_p_inf;
-% c3 = (3/32)*(rhostar_p_inf/(SR^2))*(ustar_p_inf^2);
-% c4 = XStar(1,x0ind)/rhostar_n_inf;
-% c5 = (1/4)*(1/SR)*ustar_n_inf;
-% c6 = (3/32)*(rhostar_n_inf/(SR^2))*(ustar_n_inf^2);
-% 
-% kappastar_p_inf = @(xstar) (c1*(xstar.^-0.5)) ...
-%     + (c2*(xstar.^-1)) ...
-%     + (c3*(xstar.^-1.5));
-% kappastar_n_inf = @(xstar) (c4*(xstar.^-0.5)) ...
-%     + (c5*(xstar.^-1)) ...
-%     + (c6*(xstar.^-1.5));
 
 %% define numerical solution
 kappastar_p_inf = repelem(0,Nx);
@@ -57,4 +44,5 @@ legend('\kappa* at +\infty (PDE numerical solution)', ...
     '\kappa* at -\infty (PDE numerical solution)', ...
     '\kappa* at +\infty (ODE numerical solution)', ...
     '\kappa* at -\infty (ODE numerical solution)')
+saveas(gcf,strcat([prepath,'Compare_ODE.png']))
 
