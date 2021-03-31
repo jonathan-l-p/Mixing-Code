@@ -118,9 +118,11 @@ l4 = ['x* = ', num2str(x_vectorStar(i4))];
 l5 = ['x* = ', num2str(x_vectorStar(i5))];
 
 % plot legend
-%legend(l1, l2, l3, l4, l5, l6, 'Location', 'north')
-legend(l1, l2, l3, l4, l5)
+legend(l1, l2, l3, l4, l5, 'Location', 'Best')
 
 % label y axis
 ylabel('y*')
+
+% font size
+set(gca,'FontSize',18)
 end

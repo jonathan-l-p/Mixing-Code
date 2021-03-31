@@ -18,4 +18,6 @@ hold on
 plot(kappaStar(:,Nx),RhoBar(:), 'LineWidth', 2)
 ylim([min(YStar(:,Nx)), max(YStar(:,Nx))])
 xlabel('\kappa*')
-legend({'y = y*', 'y = $\bar{\rho}$'},'Interpreter','Latex')
+legend({'y = y*', 'y = $\bar{\rho}$'}, ...
+    'Interpreter','Latex','Location','best')
+set(gca,'FontSize',18)

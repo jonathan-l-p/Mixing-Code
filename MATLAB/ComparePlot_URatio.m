@@ -7,7 +7,7 @@ PlotPath = '/Users/jonathan/Downloads/sample UR plots/';
 
 %% SR = 1.0
 load([SavePath, 'Pr_1d0_SR_2d0_UR_2d0'])
-l1 = ['U_\infty/ = ', num2str(FSR_U)];
+l1 = ['U_\infty/U_{-\infty} = ', num2str(FSR_U)];
 Pr1 = Pr;
 SR1 = strain_ratio;
 UR1 = FSR_U;
@@ -64,34 +64,39 @@ hold on
 
 %% SR = 4.0
 load([SavePath, 'Pr_1d0_SR_2d0_UR_8d0'])
-l2 = ['U_\infty/ = ', num2str(FSR_U)];
+l2 = ['U_\infty/U_{-\infty} = ', num2str(FSR_U)];
 Pr2 = Pr;
 SR2 = strain_ratio;
 UR2 = FSR_U;
 
 figure(1)
 plot(uStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2)
+legend(l1, l2, 'Location', 'best')
+set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'ustar.png']))
 
 figure(2)
 plot(vStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2)
+legend(l1, l2, 'Location', 'best')
+set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'vstar.png']))
 
 figure(3)
 plot(hStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2)
+legend(l1, l2, 'Location', 'best')
+set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'hstar.png']))
 
 figure(4)
 plot(Y1(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2)
+legend(l1, l2, 'Location', 'best')
+set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'Y1.png']))
 
 figure(5)
 plot(kappaStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2)
+legend(l1, l2, 'Location', 'best')
+set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'kappastar.png']))
 
 %% test case matches
