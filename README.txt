@@ -11,6 +11,7 @@ Fluid and computational parameters can be adjusted in 'global_variables.f90'.
 
 Execute 'script_clean' to completely recompile and execute the Fortran code.
 Execute 'script' to run the Fortran code without forcing a recompilation.
+Run 'make clean' in order to remove .o and .mod files 
 
 To import fluid data into MATLAB, run 'a_importf.m'. Ensure that the export directory 'SavePath' in 'global_variables.f90' matches the import directory of the same name in 'a_importf.m'.
 

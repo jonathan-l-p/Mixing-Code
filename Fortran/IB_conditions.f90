@@ -130,8 +130,6 @@ module IBconditions
     subroutine applyIBkappa()
       ! define \kappa_{\infinity} / \kappa_{-\infinity}
       FSR_kappa = sqrt(RhoStar(Ny,1)/RhoStar(1,1))
-      ! FSR_kappa = (RhoStar(Ny,1)/RhoStar(1,1)) + FSR_U &
-      ! + ((RhoStar(1,1)/RhoStar(Ny,1))*(FSR_U**2))
 
       ! define \kappa for all y at x = 0
       do i = 1,Ny
@@ -143,17 +141,14 @@ module IBconditions
       ! apply kappai to x=0
       kappaStar(:,1) = kappaStari(:,1)
 
-      ! ! apply kappaHp to y=H
-      ! ! kappaStar(1,1:x0ind) = kappaStari(1,1)
-      !  kappaStar(1,:) = 1.d0 / (1.d0 + sqrt(XStar(1,:)))
-      !
-      ! !   ! apply kappaHp to y=-H
-      ! ! kappaStar(Ny,1:x0ind) = kappaStar(1,1)/FSR_kappa
-      ! kappaStar(Ny,:) = kappaStar(1,:)/FSR_kappa
+      ! don't define boundary conditions for kappa because we don't know them yet
 
       fStar(1,:) = 1.d0 / (1.d0 + sqrt(XStar(1,:)))
+
       ! fStar(1,:) = 1.d0
+
       ! fStar(1,1:x0ind) = 1.d0
+      
       ! do i = x0ind + 1, Nx
       !   fStar(1,i) = sqrt(xStar(1,x0ind) / xStar(1,i))
       !   ! fStar(1,i) = 1/sqrt(xStar(1,i))

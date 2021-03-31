@@ -1,4 +1,11 @@
 ! module to simplify the expression of conductive/advective and diffusive equations
+
+  ! Four of our governing equations have the form
+  ! \begin{equation}
+  ! \rho^* u^* \pdv{a}{x^*} + \rho^* v^* \pdv{a}{y^*} + A = c\frac{\partial}{\partial y^*}(\mu^*\pdv{a}{y^*})
+  ! \end{equation} where \(a\) is the explicited variable, \(A\) is some non-differential
+  !  term (or 0), and \(c\) is a constant (either \(\frac{1}{Pr}\) or 1)
+
 ! uses global module
 ! uses realprecision module
 module CleanScheme

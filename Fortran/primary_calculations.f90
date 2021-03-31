@@ -99,16 +99,6 @@ module primarycalcs
     end subroutine vStarScheme
 
     subroutine kappaStarScheme()
-      ! if x index > x0ind, we need to modify \kappa*_{\infinity} and
-      ! \kappa*_{-\infinity}
-      ! if (k+1 > x0ind) then
-      !   ! kappaStar(1,k+1) = 1.d0
-      !   ! kappaStar(Ny,k+1) = 1.d0/FSR_kappa
-      !   ! kappaStar(1,k+1) = (a/sqrt(XStar(1,k))) - (a/sqrt(XStar(1,x0ind))) + 1.d0
-      !   kappaStar(1,k+1) = sqrt(XStar(1,x0ind)/XStar(1,k+1))
-      !   kappaStar(Ny,k+1) = kappaStar(1,k+1)/FSR_kappa
-      ! endif
-
       do n6 = 2, (Ny - 1)
         DOY1_Temp = DO_CentralY(kappaStar(n6+1,k), kappaStar(n6-1,k))
         DOY2_Temp = DO_CentralY2_mu(kappaStar(n6+1,k), kappaStar(n6,k), &

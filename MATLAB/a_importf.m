@@ -1,7 +1,7 @@
 clear;clc;
 close all;
 
-SavePath = '/Users/jonathan/Documents/DataDump/out_Fortran/';
+InPath = '/Users/jonathan/Documents/DataDump/out_Fortran/';
 
 % import number of samples in x and y
 Nx = readfromfortran_int('out_Nx.bin',1,1);

@@ -81,15 +81,6 @@ module properties
       findCombCp = (Y1*cp1) + (Y2*cp2) ! [J/(kg K)]
     end function findCombCp
 
-    ! ! find enthalpy of mixed fluids based on combined Cp and T
-    ! real(dp) function findEnth(Cp,T)
-    !   real(dp), intent(in) :: Cp
-    !   real(dp), intent(in) :: T
-    !
-    !   ! findEnth = Cp*(T - 298.15d0) ! [J/kg]
-    !   findEnth = Cp*T ! [J/kg]
-    ! end function findEnth
-
     ! find temperature of mixed fluids as a function of normalized enthalpy
     ! * pure composition of free stream assumption
     real(dp) function findTemp(cp,hstar)

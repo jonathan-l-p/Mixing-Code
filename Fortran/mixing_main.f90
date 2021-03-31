@@ -18,19 +18,7 @@ program mixing
   print*
 
   ! SETUP ----------------------------------------------------------------------
-  ! ! define dimensionless and relevant constants
-  ! call dimlessConstants()
-
-  ! ! set h (y domain, [-h, h]) to be much greater than the approximated max
-  ! ! mixing layer thickness
-  ! delta_max_approx = L/sqrt((Uhp - Uhn)*RhoHP*L/MuHP)
-  ! h = FS*delta_max_approx
-
-  ! ! find delta_x and delta_y
-  ! delta_x = L/(Nx - 1)
-  ! delta_y = -2.d0*h/(Ny - 1)
-
-  ! now we can find delta_x_Star and delta_y_Star
+  ! find delta_x_Star and delta_y_Star based on domain size and # of samples
   delta_x_Star = 1.d0/(Nx - 1) ! delta_x / L
   delta_y_Star = -2.d0*F/(Ny-1) ! /sqrt{Re} delta_y / L
 
@@ -62,7 +50,8 @@ program mixing
   ! apply initial and boundary kappa to kappaStar
   call applyIBkappa()
 
-  ! the domain is now up-to-date with initial and boundary conditions
+  ! the domain is now up-to-date with initial and boundary conditions (except for
+  ! the kappa boundaries, which we will calculate in the main loop)
 
   ! PRIMARY CALCULATIONS -------------------------------------------------------
   ! MAIN LOOP
