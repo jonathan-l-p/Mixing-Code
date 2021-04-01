@@ -15,9 +15,9 @@ UR1 = FSR_U;
 % u
 figure(1)
 plot(uStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-title(['Pr = ', num2str(Pr), ...
-    ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
-    ' at x* = ', num2str(XStar(1,Nx))])
+% title(['Pr = ', num2str(Pr), ...
+%     ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
+%     ' at x* = ', num2str(XStar(1,Nx))])
 xlabel('u*')
 ylabel('y*')
 hold on
@@ -25,9 +25,9 @@ hold on
 % v
 figure(2)
 plot(vStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-title(['Pr = ', num2str(Pr), ...
-    ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
-    ' at x* = ', num2str(XStar(1,Nx))])
+% title(['Pr = ', num2str(Pr), ...
+%     ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
+%     ' at x* = ', num2str(XStar(1,Nx))])
 xlabel('v*')
 ylabel('y*')
 hold on
@@ -35,9 +35,9 @@ hold on
 % h
 figure(3)
 plot(hStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-title(['Pr = ', num2str(Pr), ...
-    ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
-    ' at x* = ', num2str(XStar(1,Nx))])
+% title(['Pr = ', num2str(Pr), ...
+%     ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
+%     ' at x* = ', num2str(XStar(1,Nx))])
 xlabel('h*')
 ylabel('y*')
 hold on
@@ -45,9 +45,9 @@ hold on
 % Y1
 figure(4)
 plot(Y1(:,Nx), YStar(:,1), 'LineWidth', 2)
-title(['Pr = ', num2str(Pr), ...
-    ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
-    ' at x* = ', num2str(XStar(1,Nx))])
+% title(['Pr = ', num2str(Pr), ...
+%     ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
+%     ' at x* = ', num2str(XStar(1,Nx))])
 xlabel('Y1')
 ylabel('y*')
 hold on
@@ -55,15 +55,15 @@ hold on
 % kappa
 figure(5)
 plot(kappaStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-title(['Pr = ', num2str(Pr), ...
-    ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
-    ' at x* = ', num2str(XStar(1,Nx))])
+% title(['Pr = ', num2str(Pr), ...
+%     ' and U_\infty/U_{-\infty} = ', num2str(FSR_U), ...
+%     ' at x* = ', num2str(XStar(1,Nx))])
 xlabel('\kappa*')
 ylabel('y*')
 hold on
 
-%% SR = 4.0
-load([SavePath, 'Pr_1d0_SR_4d0_UR_4d0'])
+%% SR = 2.0
+load([SavePath, 'Pr_1d0_SR_2d0_UR_4d0'])
 l2 = ['\kappa_\inftyL/U_\infty = ', num2str(strain_ratio)];
 Pr2 = Pr;
 SR2 = strain_ratio;
@@ -71,35 +71,60 @@ UR2 = FSR_U;
 
 figure(1)
 plot(uStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2, 'Location', 'best')
+
+figure(2)
+plot(vStar(:,Nx), YStar(:,1), 'LineWidth', 2)
+
+figure(3)
+plot(hStar(:,Nx), YStar(:,1), 'LineWidth', 2)
+
+figure(4)
+plot(Y1(:,Nx), YStar(:,1), 'LineWidth', 2)
+
+figure(5)
+plot(kappaStar(:,Nx), YStar(:,1), 'LineWidth', 2)
+
+%% SR = 4.0
+load([SavePath, 'Pr_1d0_SR_4d0_UR_4d0'])
+l3 = ['\kappa_\inftyL/U_\infty = ', num2str(strain_ratio)];
+Pr3 = Pr;
+SR3 = strain_ratio;
+UR3 = FSR_U;
+
+figure(1)
+plot(uStar(:,Nx), YStar(:,1), 'LineWidth', 2)
+legend(l1, l2, l3, 'Location', 'best')
 set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'ustar.png']))
 
 figure(2)
 plot(vStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2, 'Location', 'best')
+legend(l1, l2, l3, 'Location', 'best')
 set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'vstar.png']))
 
 figure(3)
 plot(hStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2, 'Location', 'best')
+legend(l1, l2, l3, 'Location', 'best')
 set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'hstar.png']))
 
 figure(4)
 plot(Y1(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2, 'Location', 'best')
+legend(l1, l2, l3, 'Location', 'best')
 set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'Y1.png']))
 
 figure(5)
 plot(kappaStar(:,Nx), YStar(:,1), 'LineWidth', 2)
-legend(l1, l2, 'Location', 'best')
+legend(l1, l2, l3, 'Location', 'best')
 set(gca,'FontSize',18)
 saveas(gcf,strcat([PlotPath,'kappastar.png']))
 
 %% test case matches
 if ~( (Pr1==Pr2) && (UR1==UR2) )
+    fprintf('Error: cases do not match\n')
+end
+if ~( (Pr3==Pr3) && (UR2==UR3) )
     fprintf('Error: cases do not match\n')
 end

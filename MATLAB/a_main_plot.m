@@ -11,63 +11,63 @@ t1 = ['Pr = ', num2str(Pr), ...
 
 plotxchop5Star(uStar,1)
 xlabel('u*')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'ustar(y).png']))
 end
 
 plotxchop5Star(vStar,2)
 xlabel('v*')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'vstar(y).png']))
 end
 
 plotxchop5Star(hStar,3)
 xlabel('h*')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'hstar(y).png']))
 end
 
 plotxchop5Star(Y1,4)
 xlabel('Y1')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'Y1(y).png']))
 end
 
 plotxchop5Star(Y2,5)
 xlabel('Y2')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'Y2(y).png']))
 end
 
 plotxchop5Star(rhoStar,6)
 xlabel('\rho*')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'rhostar(y).png']))
 end
 
 plotxchop5Star(muStar,7)
 xlabel('\mu*')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'mustar(y).png']))
 end
 
 plotxchop5Star(T,8)
 xlabel('T')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'T(y).png']))
 end
 
 plotxchop5Star(kappaStar,9)
 xlabel('\kappa*')
-title(t1)
+% title(t1)
 if SAVEALL
     saveas(gcf,strcat([prepath,'kappastar(y).png']))
 end
