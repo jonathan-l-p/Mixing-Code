@@ -12,3 +12,5 @@ echo "Done!"
 echo
 
 ./main
+
+make clean

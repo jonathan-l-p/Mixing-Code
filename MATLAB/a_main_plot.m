@@ -2,7 +2,7 @@
 close all
 
 prepath = '/Users/jonathan/Downloads/VariableKappaInf/';
-SAVEALL = 1;
+SAVEALL = 0;
 
 t1 = ['Pr = ', num2str(Pr), ...
     ', \kappa_\inftyL/U_\infty = ', num2str(strain_ratio) ...
