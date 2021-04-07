@@ -1,3 +1,5 @@
+% CAUTION: the ybar in this code does not match the ybar used by Sirignano
+
 prepath = '/Users/jonathan/Documents/MATLAB_PlotDump/YBar/';
 
 % define YBar, which is the integral of rho along y at x* = 1

@@ -1,5 +1,7 @@
 program mixing
   use realprecision
+  use math
+  use SigVars
   use global
   use meshgen
   use properties
@@ -52,6 +54,8 @@ program mixing
 
   ! the domain is now up-to-date with initial and boundary conditions (except for
   ! the kappa boundaries, which we will calculate in the main loop)
+  print*,'Set up computational domain with initial and boundary conditions'
+  print*
 
   ! PRIMARY CALCULATIONS -------------------------------------------------------
   ! MAIN LOOP
@@ -78,9 +82,19 @@ program mixing
       call vStarScheme()
     end do
 
-    print*,'Completed calculations'
+    print*,'Completed main loop calculations'
     print*
   end if
+
+  ! Calculate Sirignano variables ----------------------------------------------
+  call calculate_ybar()
+  call calculate_g_of_x()
+  call calculate_eta()
+  call calculate_G_of_eta()
+  call calculate_E()
+
+  print*,'Completed calculations of Sirignano variables'
+  print*
 
   ! EXPORT ---------------------------------------------------------------------
   ! write data to binary files in order to analyze in other programs
@@ -103,6 +117,12 @@ program mixing
   call binwritef_int(Ny_ARRAY,'out_Ny.bin')
 
   call binwritef(Ank_kappa,'out_Ank_kappa.bin')
+
+  call binwritef(ybar,'out_ybar.bin')
+  call binwritef(g_of_x,'out_g_of_x.bin')
+  call binwritef(eta,'out_eta.bin')
+  call binwritef(G_of_eta,'out_G_of_eta.bin')
+  call binwritef(E,'out_E.bin')
 
   ! VARIABLE SAVES - - - - - - -
   VarSave(2,1) = delta_x_Star

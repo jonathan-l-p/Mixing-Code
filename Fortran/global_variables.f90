@@ -70,6 +70,13 @@ module global
   real(dp) :: XStar(Ny,Nx) = 0.d0, YStar(Ny,Nx) = 0.d0 ! position in x and y [m] [DIMENSIONLESS]
   real(dp) :: xvectorStar(Nx) = 0.d0, yvectorStar(Ny) = 0.d0 ! [DIMENSIONLESS]
   real(dp) :: Y1(Ny,Nx) = 0.d0, Y2(Ny,Nx) = 0.d0 ! Y1 and Y2 on entire domain
+
+  ! Sirignano variables
+  real(dp) :: ybar(Ny,Nx) = 0.d0
+  real(dp) :: g_of_x(Ny,Nx) = 0.d0
+  real(dp) :: eta(Ny,Nx) = 0.d0
+  real(dp) :: G_of_eta(Ny,Nx) = 0.d0
+  real(dp) :: E(Ny,Nx) = 0.d0
   ! - - - - - - -
 
 end module global
