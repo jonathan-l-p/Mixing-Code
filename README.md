@@ -1,4 +1,4 @@
-Mixing Code for shear, compression, and diffusion analysis
+###Mixing Code for shear, compression, and diffusion analysis
 Author: Jonathan Palafoutas, Winter 2020
 
 ABOUT:
