@@ -24,8 +24,8 @@ program mixing
   delta_x_Star = 1.d0/(Nx - 1) ! delta_x / L
   delta_y_Star = -2.d0*F/(Ny-1) ! /sqrt{Re} delta_y / L
 
-  ! ! check if the proposed domain is stable
-  ! call stability_check()
+  ! check if the proposed domain is stable
+  call stability_check()
 
   ! generate mesh
   call meshgenStarxy()

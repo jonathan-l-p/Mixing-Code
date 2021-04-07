@@ -10,10 +10,10 @@ module global
 
   ! integer, parameter :: Nx = 160000
   ! integer, parameter :: Ny = 853
-  ! integer, parameter :: Nx = 80000
-  ! integer, parameter :: Ny = 603
-  integer, parameter :: Nx = 40000
-  integer, parameter :: Ny = 427 ! 426
+  integer, parameter :: Nx = 27500
+  integer, parameter :: Ny = 701
+  ! integer, parameter :: Nx = 11000
+  ! integer, parameter :: Ny = 427 ! 426
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301
   integer, parameter :: x0ind = 1 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
@@ -51,7 +51,8 @@ module global
   integer :: Nx_ARRAY(1,1) = Nx
   integer :: Ny_ARRAY(1,1) = Ny
 
-  logical :: BreakLoop = .false. ! logical variable for whether or not to stop computation
+  logical :: BreakLoop = .false. ! flag for whether or not to stop computation
+  logical :: StableDomain = .true. ! flag for whether or not domain in stable
 
   real(dp) :: Ank_kappa(Ny,Nx) = 0.d0 ! [TEST] for testing the behavior of one of the terms in the kappa equation
   real(dp) :: delta_x_Star, delta_y_Star ! [DIMENSIONLESS]

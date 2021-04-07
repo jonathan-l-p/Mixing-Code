@@ -8,29 +8,16 @@ module stable
   real(dp) :: test
 
 contains
-  ! subroutine stability_check()
-  !   if (delta_x <= (RhoHP*(delta_y**2))/(2.d0*MuHP)) then
-  !     print*,'The finite difference scheme is stable.'
-  !   else
-  !     print*,'The finite difference scheme is unstable'
-  !     print*,'There should be at least', &
-  !     MuHP*L*((Ny-1)**2)/(2.d0*RhoHP*(h**2)) + 1.d0 &
-  !     ,'sample points for x.'
-  !   endif
-  !   print*
-  ! end subroutine stability_check
-
-  ! ! a normalized and less specific version of stability_check
-  ! subroutine stability_check2()
-  !   if (delta_x <= (RhoHP*(delta_y**2))/(2.d0*MuHP)) then
-  !     print*,'The finite difference scheme is stable.'
-  !   else
-  !     print*,'The finite difference scheme is unstable'
-  !     print*,'There should be at least', &
-  !     MuHP*L*((Ny-1)**2)/(2.d0*RhoHP*(h**2)) + 1.d0 &
-  !     ,'sample points for x.'
-  !   endif
-  !   print*
-  ! end subroutine stability_check2
-
+  subroutine stability_check()
+    if (delta_x_Star <= 0.5d0*(delta_y_Star**2)) then
+      print*,'The finite difference scheme is stable.'
+    else
+      print*,'The finite difference scheme is unstable'
+      print*,'There should be at least', &
+      ((Ny-1)**2)/(2.d0*(F**2)) + 1.d0 &
+      ,'sample points for x.'
+      StableDomain = .false.
+    endif
+    print*
+  end subroutine stability_check
 end module stable
