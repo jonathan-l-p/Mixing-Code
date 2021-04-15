@@ -23,7 +23,7 @@ module global
   ! under construction
   ! nondimensional input variables
   real(dp) :: F = 3.0d0 ! F = 5.d0 ! factor to ensure that the computational domain is wider than the maximum boundary layer thickness
-  real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
+  real(dp) :: FSR_h = 1.d0/3.d0 ! h_{\infinity} / h_{-\infinity} INVERTED
   real(dp) :: FSR_u = 4.0d0 ! u_{\infinity} / u_{-\infinity}
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
   real(dp) :: Pr = 1.0d0 ! Prandtl number
@@ -41,6 +41,7 @@ module global
   real(dp) :: Tcrit1 = 154.55d0 ! critical temperature of fluid 1, [K]
   real(dp) :: Tcrit2 = 369.15d0 ! critical temperature of fluid 2, [K]
   real(dp) :: THp = 800.d0 ! free stream temperature at y = H, [K]
+  real(dp) :: THp
   real(dp) :: Vcrit1 = 0.0025d0 ! critical volume of fluid 1, [m3/kg]
   real(dp) :: Vcrit2 = 0.0045d0 ! critical volume of fluid 2, [m3/kg]
   real(dp) :: W1 = 0.032d0 ! molecular weight of fluid 1, [kg/mol]

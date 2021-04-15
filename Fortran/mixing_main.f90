@@ -24,6 +24,14 @@ program mixing
   delta_x_Star = 1.d0/(Nx - 1) ! delta_x / L
   delta_y_Star = -2.d0*F/(Ny-1) ! /sqrt{Re} delta_y / L
 
+  ! find free stream temperature
+  ! enthalpy of propane at 300K is cp2*300
+  ! enthalpy of oxygen should be (1/FSR_h)*cp2*300
+  ! finally, the oxygen temperature should be (1/FSR_h)*cp2*300/cp1
+  THp = (1.d0/FSR_h)*(cp2/cp1)*300.d0 ! free stream temperature at y = H, [K]
+  print*,'THp = ',THp
+  print*
+
   ! check if the proposed domain is stable
   call stability_check()
 
