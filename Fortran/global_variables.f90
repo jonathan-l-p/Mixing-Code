@@ -10,10 +10,10 @@ module global
 
   ! integer, parameter :: Nx = 160000
   ! integer, parameter :: Ny = 853
-  integer, parameter :: Nx = 27500
-  integer, parameter :: Ny = 701
-  ! integer, parameter :: Nx = 11000
-  ! integer, parameter :: Ny = 427 ! 426
+  ! integer, parameter :: Nx = 27500
+  ! integer, parameter :: Ny = 701
+  integer, parameter :: Nx = 40000
+  integer, parameter :: Ny = 427 ! 426
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301
   integer, parameter :: x0ind = 1 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
@@ -24,7 +24,7 @@ module global
   ! nondimensional input variables
   real(dp) :: F = 3.0d0 ! F = 5.d0 ! factor to ensure that the computational domain is wider than the maximum boundary layer thickness
   real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
-  real(dp) :: FSR_u = 4.d0 ! u_{\infinity} / u_{-\infinity}
+  real(dp) :: FSR_u = 4.0d0 ! u_{\infinity} / u_{-\infinity}
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
   real(dp) :: Pr = 1.0d0 ! Prandtl number
   real(dp) :: strain_ratio = 2.d0 ! \kappa_{\infinity}(x0ind) L / U_{\infinity}

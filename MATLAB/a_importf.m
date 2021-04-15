@@ -40,6 +40,9 @@ FSR_U = VarSave(7);
 FSR_h = VarSave(8);
 Pr = VarSave(9);
 
+% determine if f(x) is constant at infinity
+ConstantKappaAtInf = all(fStar == fStar(1));
+
 % determine if the results contain NaN of negative values
 BADIMPORT = false;
 
@@ -74,5 +77,6 @@ if BADIMPORT == false
     fprintf('Pr = %.1f\n', Pr)
     fprintf('SR = %.1f\n', strain_ratio)
     fprintf('UR = %.1f\n', FSR_U)
+    fprintf('f(x) constant = %i\n', ConstantKappaAtInf)
     fprintf('\n')
 end

@@ -24,5 +24,4 @@ module math
         trap = trap + 0.5d0*b*(h1+h2)
       end do
     end function trap
-
 end module math

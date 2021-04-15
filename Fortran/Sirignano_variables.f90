@@ -16,24 +16,22 @@ module SigVars
       do j = 1,Nx
         do i = 1,floor(real(Ny)/2.d0)
           ybar(i,j) = trap(YStar(ceiling(real(Ny)/2.d0):i:-1 , j), &
-            rhoStar(ceiling(real(Ny)/2.d0):i:-1 , j)&
-            *YStar(ceiling(real(Ny)/2.d0):i:-1 , j));
+            rhoStar(ceiling(real(Ny)/2.d0):i:-1 , j))
         end do
 
         do i = (ceiling(real(Ny)/2.d0)+1),Ny
           ybar(i,j) = trap(YStar(ceiling(real(Ny)/2.d0):i , j), &
-            rhoStar(ceiling(real(Ny)/2.d0):i , j)&
-            *YStar(ceiling(real(Ny)/2.d0):i , j));
+            rhoStar(ceiling(real(Ny)/2.d0):i , j))
         end do
-    end do
+      end do
     end subroutine calculate_ybar
 
     subroutine calculate_g_of_x()
-      g_of_x = sqrt(2*rhoStar(1,1)*muStar(1,1)*XStar/uStar(1,1));
+      g_of_x = sqrt(2*rhoStar(1,1)*muStar(1,1)*XStar/uStar(1,1))
     end subroutine calculate_g_of_x
 
     subroutine calculate_eta()
-      eta = ybar/g_of_x;
+      eta = ybar/g_of_x
       ! CAUTION: eta will be inf at x=0
     end subroutine calculate_eta
 
@@ -46,14 +44,12 @@ module SigVars
       do j = 1,Nx
         do i = 1,floor(real(Ny)/2.d0)
           E(i,j) = trap(eta(ceiling(real(Ny)/2.d0):i:-1 , j), &
-            G_of_eta(ceiling(real(Ny)/2.d0):i:-1 , j)&
-            *eta(ceiling(real(Ny)/2.d0):i:-1 , j));
+            G_of_eta(ceiling(real(Ny)/2.d0):i:-1 , j))
         end do
 
         do i = (ceiling(real(Ny)/2.d0)+1),Ny
           E(i,j) = trap(eta(ceiling(real(Ny)/2.d0):i , j), &
-            G_of_eta(ceiling(real(Ny)/2.d0):i , j)&
-            *eta(ceiling(real(Ny)/2.d0):i , j));
+            G_of_eta(ceiling(real(Ny)/2.d0):i , j))
         end do
       end do
     end subroutine calculate_E
