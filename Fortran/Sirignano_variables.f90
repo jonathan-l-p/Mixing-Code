@@ -54,4 +54,11 @@ module SigVars
       end do
     end subroutine calculate_E
 
+    subroutine calculate_Alpha()
+      Alpha = Y2 - (nu*Y1)
+    end subroutine calculate_Alpha
+
+    subroutine calculate_Beta()
+    end subroutine calculate_Beta
+
 end module SigVars
