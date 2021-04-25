@@ -32,19 +32,36 @@ module IBconditions
       UStar(Ny,:) = 1.d0/FSR_U
     end subroutine applyIBu
 
+    ! subroutine applyIBh()
+    !   ! define h for all y at x = 0
+    !   do i = 1,Ny
+    !     ! assume h*(y = h) = 1
+    !     hStari(i,1) = (((1.d0/FSR_h) + 1.d0)/2.d0) &
+    !     + ((((1.d0/FSR_h) - 1.0d0)/2.d0)*tanh(G*yvectorStar(i)))
+    !   end do
+    !
+    !   ! apply hi to x=0
+    !   hStar(:,1) = hStari(:,1)
+    !
+    !   ! apply hHp to y=H
+    !   hStar(1,:) = 1.d0/FSR_h
+    !
+    !   ! apply hHn to y=-H
+    !   hStar(Ny,:) = 1.d0
+    ! end subroutine applyIBh
+
     subroutine applyIBh()
       ! define h for all y at x = 0
       do i = 1,Ny
         ! assume h*(y = h) = 1
-        hStari(i,1) = (((1.d0/FSR_h) + 1.d0)/2.d0) &
-        + ((((1.d0/FSR_h) - 1.0d0)/2.d0)*tanh(G*yvectorStar(i)))
+        hStari(i,1) = 1.d0
       end do
 
       ! apply hi to x=0
       hStar(:,1) = hStari(:,1)
 
       ! apply hHp to y=H
-      hStar(1,:) = 1.d0/FSR_h
+      hStar(1,:) = 1.d0
 
       ! apply hHn to y=-H
       hStar(Ny,:) = 1.d0
