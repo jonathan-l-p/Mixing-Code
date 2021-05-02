@@ -28,7 +28,7 @@ program mixing
   ! enthalpy of propane at 300K is cp2*300
   ! enthalpy of oxygen should be (1/FSR_h)*cp2*300
   ! finally, the oxygen temperature should be (1/FSR_h)*cp2*300/cp1
-  THp = (1.d0/FSR_h)*(cp2/cp1)*300.d0 ! free stream temperature at y = H, [K]
+  THp = 300.d0 ! THp = (1.d0/FSR_h)*(cp2/cp1)*300.d0 ! free stream temperature at y = H, [K]
   print*,'THp = ',THp
   print*
 
@@ -98,8 +98,8 @@ program mixing
   call calculate_ybar()
   call calculate_g_of_x()
   call calculate_eta()
-  call calculate_G_of_eta()
-  call calculate_E()
+  ! call calculate_G_of_eta()
+  ! call calculate_E()
   call calculate_Alpha()
 
   print*,'Completed calculations of Sirignano variables'

@@ -87,7 +87,8 @@ module properties
       real(dp), intent(in) :: cp ! combined spefic heat of pressure
       real(dp), intent(in) :: hstar ! normalized enthalpy
 
-      findTemp = (1.d0/3.d0)*cp1*THp*hstar/cp ! [K]
+      ! findTemp = (1.d0/3.d0)*cp1*THp*hstar/cp ! [K]
+      findTemp = cp1*THp*hstar/cp ! [K]
     end function findTemp
 
     ! find density of mixed fluids based on temperature and composition

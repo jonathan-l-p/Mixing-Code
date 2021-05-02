@@ -27,7 +27,7 @@ module SigVars
     end subroutine calculate_ybar
 
     subroutine calculate_g_of_x()
-      g_of_x = sqrt(2*rhoStar(1,1)*muStar(1,1)*XStar/uStar(1,1))
+      g_of_x = sqrt(2.d0*XStar)
     end subroutine calculate_g_of_x
 
     subroutine calculate_eta()
@@ -36,7 +36,7 @@ module SigVars
     end subroutine calculate_eta
 
     subroutine calculate_G_of_eta()
-      G_of_eta = 2.d0*kappaStar*XStar/uStar(1,1)
+      G_of_eta = 2.d0*strain_ratio*kappaStar*XStar
     end subroutine calculate_G_of_eta
 
     subroutine calculate_E()
