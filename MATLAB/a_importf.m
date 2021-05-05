@@ -27,8 +27,8 @@ AnkKappa = readfromfortran('out_Ank_kappa.bin',Ny,Nx);
 ybar = readfromfortran('out_ybar.bin',Ny,Nx);
 g_of_x = readfromfortran('out_g_of_x.bin',Ny,Nx);
 eta = readfromfortran('out_eta.bin',Ny,Nx);
-% G_of_eta = readfromfortran('out_G_of_eta.bin',Ny,Nx);
-% E = readfromfortran('out_E.bin',Ny,Nx);
+G_of_eta = readfromfortran('out_G_of_eta.bin',Ny,Nx);
+E = readfromfortran('out_E.bin',Ny,Nx);
 Alpha = readfromfortran('out_Alpha.bin',Ny,Nx);
 
 VarSave = readfromfortran('out_VarSave.bin',25,1);

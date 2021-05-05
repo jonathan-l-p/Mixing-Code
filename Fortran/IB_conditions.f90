@@ -160,7 +160,7 @@ module IBconditions
 
       ! don't define boundary conditions for kappa because we don't know them yet
 
-      fStar(1,:) = 1.d0 / (1.d0 +XStar(1,:))
+      fStar(1,:) = sqrt(1.d0 - (1.d0/strain_ratio))*(1.d0/(0.2d0 + XStar(1,:)))
 
       ! fStar(1,:) = 1.d0
 

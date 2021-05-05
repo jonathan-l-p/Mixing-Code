@@ -98,8 +98,8 @@ program mixing
   call calculate_ybar()
   call calculate_g_of_x()
   call calculate_eta()
-  ! call calculate_G_of_eta()
-  ! call calculate_E()
+  call calculate_G_of_eta()
+  call calculate_E()
   call calculate_Alpha()
 
   print*,'Completed calculations of Sirignano variables'
