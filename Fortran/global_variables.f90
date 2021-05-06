@@ -16,6 +16,7 @@ module global
   integer, parameter :: Ny = 427 ! 426
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301
+  integer, parameter :: x0ind = 5000 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
 
   logical :: BuildMain = .true. ! logical variable to determine whether or not the run the main loop
 
