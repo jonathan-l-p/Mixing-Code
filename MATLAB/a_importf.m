@@ -29,12 +29,17 @@ g_of_x = readfromfortran('out_g_of_x.bin',Ny,Nx);
 eta = readfromfortran('out_eta.bin',Ny,Nx);
 G_of_eta = readfromfortran('out_G_of_eta.bin',Ny,Nx);
 E = readfromfortran('out_E.bin',Ny,Nx);
+<<<<<<< Updated upstream
+=======
+Alpha = readfromfortran('out_Alpha.bin',Ny,Nx);
+strain_ratio = readfromfortran('out_SR.bin',1,Nx);
+>>>>>>> Stashed changes
 
 VarSave = readfromfortran('out_VarSave.bin',25,1);
 delta_x_star = VarSave(2);
 delta_y_star = VarSave(3);
 FSR_kappa = VarSave(4);
-strain_ratio = VarSave(5);
+c = VarSave(5);
 x0ind = VarSave(6);
 FSR_U = VarSave(7);
 FSR_h = VarSave(8);
@@ -75,7 +80,7 @@ if BADIMPORT == false
     fprintf('Successfully imported fluid data!\n')
     fprintf('\n')
     fprintf('Pr = %.1f\n', Pr)
-    fprintf('SR = %.1f\n', strain_ratio)
+    fprintf('SR = %.1f\n', strain_ratio(x0ind))
     fprintf('UR = %.1f\n', FSR_U)
     fprintf('f(x) constant = %i\n', ConstantKappaAtInf)
     fprintf('\n')

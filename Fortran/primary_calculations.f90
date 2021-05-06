@@ -83,7 +83,7 @@ module primarycalcs
         + ((rhoStar(n4,k)/delta_x_Star)*(uStar(n4,k+1)-uStar(n4,k))) &
         + ((vStar(n4,k)/(-2.d0*delta_y_Star))&
         *(rhoStar(n4+1,k+1)-rhoStar(n4-1,k+1))) &
-        + (strain_ratio*rhoStar(n4,k)*kappaStar(n4,k))))
+        + (strain_ratio(1,k)*rhoStar(n4,k)*kappaStar(n4,k))))
       end do
 
       ! then travel downward from y = 0
@@ -94,7 +94,7 @@ module primarycalcs
         + ((rhoStar(n5,k)/delta_x_Star)*(uStar(n5,k+1)-uStar(n5,k))) &
         + ((vStar(n5,k)/(2.d0*delta_y_Star))&
         *(rhoStar(n5+1,k+1)-rhoStar(n5-1,k+1))) &
-        + (strain_ratio*rhoStar(n5,k)*kappaStar(n5,k))))
+        + (strain_ratio(1,k)*rhoStar(n5,k)*kappaStar(n5,k))))
       end do
     end subroutine vStarScheme
 
@@ -103,8 +103,8 @@ module primarycalcs
         DOY1_Temp = DO_CentralY(kappaStar(n6+1,k), kappaStar(n6-1,k))
         DOY2_Temp = DO_CentralY2_mu(kappaStar(n6+1,k), kappaStar(n6,k), &
         kappaStar(n6-1,k), n6)
-        Ank_Temp = (strain_ratio*rhoStar(n6,k)*(kappaStar(n6,k)**2)) &
-        - ((strain_ratio)*(fStar(1,k)**2)) ! kappaStar(1,k) = \kappa*_{\infinity}(x)
+        Ank_Temp = (strain_ratio(1,k)*rhoStar(n6,k)*(kappaStar(n6,k)**2)) &
+        - ((strain_ratio(1,k))*(fStar(1,k)**2)) ! kappaStar(1,k) = \kappa*_{\infinity}(x)
         ! Ank_Temp = 0.d0
         c_temp = 1.d0 ! c = 1
         ! - - - - - -

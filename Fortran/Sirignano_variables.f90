@@ -35,23 +35,29 @@ module SigVars
       ! CAUTION: eta will be inf at x=0
     end subroutine calculate_eta
 
+<<<<<<< Updated upstream
     subroutine calculate_G_of_eta()
       G_of_eta = 2.d0*kappaStar*XStar/uStar(1,1)
     end subroutine calculate_G_of_eta
+=======
+    ! subroutine calculate_G_of_eta()
+    !   G_of_eta = 2.d0*strain_ratio*kappaStar*XStar
+    ! end subroutine calculate_G_of_eta
+>>>>>>> Stashed changes
 
-    subroutine calculate_E()
-      ! E is defined as the integral from 0 to eta of the product of G and eta
-      do j = 1,Nx
-        do i = 1,floor(real(Ny)/2.d0)
-          E(i,j) = trap(eta(ceiling(real(Ny)/2.d0):i:-1 , j), &
-            G_of_eta(ceiling(real(Ny)/2.d0):i:-1 , j))
-        end do
-
-        do i = (ceiling(real(Ny)/2.d0)+1),Ny
-          E(i,j) = trap(eta(ceiling(real(Ny)/2.d0):i , j), &
-            G_of_eta(ceiling(real(Ny)/2.d0):i , j))
-        end do
-      end do
-    end subroutine calculate_E
+    ! subroutine calculate_E()
+    !   ! E is defined as the integral from 0 to eta of the product of G and eta
+    !   do j = 1,Nx
+    !     do i = 1,floor(real(Ny)/2.d0)
+    !       E(i,j) = trap(eta(ceiling(real(Ny)/2.d0):i:-1 , j), &
+    !         G_of_eta(ceiling(real(Ny)/2.d0):i:-1 , j))
+    !     end do
+    !
+    !     do i = (ceiling(real(Ny)/2.d0)+1),Ny
+    !       E(i,j) = trap(eta(ceiling(real(Ny)/2.d0):i , j), &
+    !         G_of_eta(ceiling(real(Ny)/2.d0):i , j))
+    !     end do
+    !   end do
+    ! end subroutine calculate_E
 
 end module SigVars

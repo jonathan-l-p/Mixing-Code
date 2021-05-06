@@ -128,6 +128,17 @@ module IBconditions
     end subroutine applyIBrho
 
     subroutine applyIBkappa()
+      ! define strain ratio from 0 to x(x0ind)
+      do i = 1, x0ind
+        strain_ratio(1,i) = G_inf/(2.d0 * XStar(1,x0ind))
+      end do
+
+      do i = x0ind + 1,Nx
+        strain_ratio(1,i) = G_inf/(2.d0 * XStar(1,i))
+      end do
+
+      ! strain ratio as a function of x has been determined
+
       ! define \kappa_{\infinity} / \kappa_{-\infinity}
       FSR_kappa = sqrt(RhoStar(Ny,1)/RhoStar(1,1))
 
@@ -143,16 +154,24 @@ module IBconditions
 
       ! don't define boundary conditions for kappa because we don't know them yet
 
+<<<<<<< Updated upstream
       ! fStar(1,:) = 1.d0 / (1.d0 + sqrt(XStar(1,:)))
+=======
+      ! fStar(1,:) = sqrt(1.d0 - (1.d0/strain_ratio))*(1.d0/(0.2d0 + XStar(1,:)))
+>>>>>>> Stashed changes
 
       fStar(1,:) = 1.d0
 
-      ! fStar(1,1:x0ind) = 1.d0
+      fStar(1,1:x0ind) = 1.d0
+      ! c = ( (1.d0/strain_ratio(1,x0ind)) + sqrt((1.d0/((strain_ratio(1,x0ind))**2)) + (4.d0*(XStar(1,x0ind)**2))) )/2.d0
+      ! c = 1.d0
+      c = 0.30177d0 ! calculated from Desmos
+      do i = x0ind + 1, Nx
+        fStar(1,i) = sqrt(c**2 - (c/strain_ratio(1,i))) / XStar(1,i)
+        ! fStar(1,i) = 1/sqrt(xStar(1,i))
+      end do
 
-      ! do i = x0ind + 1, Nx
-      !   fStar(1,i) = sqrt(xStar(1,x0ind) / xStar(1,i))
-      !   ! fStar(1,i) = 1/sqrt(xStar(1,i))
-      ! end do
+      ! z pressure gradient as a function of x has been determined with the variable strain ratio
 
     end subroutine applyIBkappa
 

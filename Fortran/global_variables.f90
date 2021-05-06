@@ -16,7 +16,6 @@ module global
   integer, parameter :: Ny = 427 ! 426
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301
-  integer, parameter :: x0ind = 1 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
 
   logical :: BuildMain = .true. ! logical variable to determine whether or not the run the main loop
 
@@ -26,8 +25,12 @@ module global
   real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
   real(dp) :: FSR_u = 4.0d0 ! u_{\infinity} / u_{-\infinity}
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
+  real(dp) :: G_inf = 1.0d0 ! Sirignano's compressive strain value (not related to G)
   real(dp) :: Pr = 1.0d0 ! Prandtl number
+<<<<<<< Updated upstream
   real(dp) :: strain_ratio = 2.d0 ! \kappa_{\infinity}(x0ind) L / U_{\infinity}
+=======
+>>>>>>> Stashed changes
   real(dp) :: Y1Hp = 1.d0 ! free stream composition of fluid 1 at y = H
   real(dp) :: Y1Hn = 0.d0 ! free stream composition of fluid 1 at y = -H
   real(dp) :: Y2Hp = 0.d0 ! free stream composition of fluid 2 at y = H
@@ -56,6 +59,7 @@ module global
 
   real(dp) :: Ank_kappa(Ny,Nx) = 0.d0 ! [TEST] for testing the behavior of one of the terms in the kappa equation
   real(dp) :: delta_x_Star, delta_y_Star ! [DIMENSIONLESS]
+  real(dp) :: c ! constant for fStar(x*) = sqrt(c^2 - c/S(x*))/x* for x > x0
   real(dp) :: FSR_kappa ! \kappa_{\infinity} / \kappa_{-\infinity}
   real(dp) :: fStar(1,Nx) = 0.d0 ! for \kappa equation
   real(dp) :: hStar(Ny,Nx) = 0.d0 ! h on entire domain [DIMENSIONLESS]
@@ -65,6 +69,7 @@ module global
   real(dp) :: muHp ! \mu at y = H
   real(dp) :: muStar(Ny,Nx) = 0.d0 ! viscosity on entire domain [DIMENSIONLESS]
   real(dp) :: rhoStar(Ny,Nx) = 0.d0 ! \rho on entire domain [DIMENSIONLESS]
+  real(dp) :: strain_ratio(1,Nx) ! \kappa_{\infinity}(x0ind) L / U_{\infinity}
   real(dp) :: T(Ny,Nx) = 0.d0 ! temperature on entire domain [K]
   real(dp) :: UStar(Ny,Nx) = 0.d0, VStar(Ny,Nx) = 0.d0 ! u and v on entire domain [DIMENSIONLESS]
   real(dp) :: VarSave(25,1) = 0.d0 ! array to save quantities of interest
