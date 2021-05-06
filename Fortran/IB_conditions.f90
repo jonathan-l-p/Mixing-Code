@@ -154,18 +154,14 @@ module IBconditions
 
       ! don't define boundary conditions for kappa because we don't know them yet
 
-<<<<<<< Updated upstream
       ! fStar(1,:) = 1.d0 / (1.d0 + sqrt(XStar(1,:)))
-=======
-      ! fStar(1,:) = sqrt(1.d0 - (1.d0/strain_ratio))*(1.d0/(0.2d0 + XStar(1,:)))
->>>>>>> Stashed changes
 
-      fStar(1,:) = 1.d0
+      ! fStar(1,:) = sqrt(1.d0 - (1.d0/strain_ratio))*(1.d0/(0.2d0 + XStar(1,:)))
 
       fStar(1,1:x0ind) = 1.d0
-      ! c = ( (1.d0/strain_ratio(1,x0ind)) + sqrt((1.d0/((strain_ratio(1,x0ind))**2)) + (4.d0*(XStar(1,x0ind)**2))) )/2.d0
+      c = ( (1.d0/strain_ratio(1,x0ind)) - sqrt((1.d0/((strain_ratio(1,x0ind))**2)) + (4.d0*(XStar(1,x0ind)**2))) )/2.d0
       ! c = 1.d0
-      c = 0.30177d0 ! calculated from Desmos
+      ! c = 0.30177d0 ! calculated from Desmos
       do i = x0ind + 1, Nx
         fStar(1,i) = sqrt(c**2 - (c/strain_ratio(1,i))) / XStar(1,i)
         ! fStar(1,i) = 1/sqrt(xStar(1,i))

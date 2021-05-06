@@ -28,10 +28,6 @@ module global
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
   real(dp) :: G_inf = 1.0d0 ! Sirignano's compressive strain value (not related to G)
   real(dp) :: Pr = 1.0d0 ! Prandtl number
-<<<<<<< Updated upstream
-  real(dp) :: strain_ratio = 2.d0 ! \kappa_{\infinity}(x0ind) L / U_{\infinity}
-=======
->>>>>>> Stashed changes
   real(dp) :: Y1Hp = 1.d0 ! free stream composition of fluid 1 at y = H
   real(dp) :: Y1Hn = 0.d0 ! free stream composition of fluid 1 at y = -H
   real(dp) :: Y2Hp = 0.d0 ! free stream composition of fluid 2 at y = H

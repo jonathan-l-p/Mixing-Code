@@ -90,14 +90,9 @@ program mixing
   call calculate_ybar()
   call calculate_g_of_x()
   call calculate_eta()
-<<<<<<< Updated upstream
-  call calculate_G_of_eta()
-  call calculate_E()
-=======
   ! call calculate_G_of_eta()
   ! call calculate_E()
-  call calculate_Alpha()
->>>>>>> Stashed changes
+  ! call calculate_Alpha()
 
   print*,'Completed calculations of Sirignano variables'
   print*
@@ -129,11 +124,8 @@ program mixing
   call binwritef(eta,'out_eta.bin')
   call binwritef(G_of_eta,'out_G_of_eta.bin')
   call binwritef(E,'out_E.bin')
-<<<<<<< Updated upstream
-=======
-  call binwritef(Alpha,'out_Alpha.bin')
+  ! call binwritef(Alpha,'out_Alpha.bin')
   call binwritef(strain_ratio,'out_SR.bin')
->>>>>>> Stashed changes
 
   ! VARIABLE SAVES - - - - - - -
   VarSave(2,1) = delta_x_Star

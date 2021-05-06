@@ -35,15 +35,9 @@ module SigVars
       ! CAUTION: eta will be inf at x=0
     end subroutine calculate_eta
 
-<<<<<<< Updated upstream
-    subroutine calculate_G_of_eta()
-      G_of_eta = 2.d0*kappaStar*XStar/uStar(1,1)
-    end subroutine calculate_G_of_eta
-=======
     ! subroutine calculate_G_of_eta()
     !   G_of_eta = 2.d0*strain_ratio*kappaStar*XStar
     ! end subroutine calculate_G_of_eta
->>>>>>> Stashed changes
 
     ! subroutine calculate_E()
     !   ! E is defined as the integral from 0 to eta of the product of G and eta
