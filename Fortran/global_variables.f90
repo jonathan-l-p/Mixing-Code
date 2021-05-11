@@ -23,7 +23,7 @@ module global
   ! under construction
   ! nondimensional input variables
   real(dp) :: F = 3.0d0 ! F = 5.d0 ! factor to ensure that the computational domain is wider than the maximum boundary layer thickness
-  real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
+  real(dp) :: FSR_h = 1.0d0 ! h_{\infinity} / h_{-\infinity}
   real(dp) :: FSR_u = 4.0d0 ! u_{\infinity} / u_{-\infinity}
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
   real(dp) :: G_inf = 1.0d0 ! Sirignano's compressive strain value (not related to G)
@@ -38,6 +38,8 @@ module global
   ! fluid2 = PROPANE
   real(dp) :: cp1 = 988.d0 ! specific heat of fluid 1, [J/(kg K)]
   real(dp) :: cp2 = 1630.d0 ! specific heat of fluid 2, [J/(kg K)]
+  real(dp) :: nu = 0.275d0 ! stoichiometric ratio of fluid 2 to fluid 1 by mass
+  real(dp) :: Q = 30.d0 ! heating value of the fuel []
   real(dp) :: Tcrit1 = 154.55d0 ! critical temperature of fluid 1, [K]
   real(dp) :: Tcrit2 = 369.15d0 ! critical temperature of fluid 2, [K]
   real(dp) :: THp = 300.d0 ! free stream temperature at y = H, [K]
@@ -80,6 +82,7 @@ module global
   real(dp) :: eta(Ny,Nx) = 0.d0
   real(dp) :: G_of_eta(Ny,Nx) = 0.d0
   real(dp) :: E(Ny,Nx) = 0.d0
+  real(dp) :: Alpha(Ny,Nx) = 0.d0
   ! - - - - - - -
 
 end module global
