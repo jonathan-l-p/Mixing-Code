@@ -163,8 +163,8 @@ module IBconditions
       ! c = 1.d0
       ! c = 0.30177d0 ! calculated from Desmos
       do i = x0ind + 1, Nx
-        fStar(1,i) = sqrt(c**2 - (c/strain_ratio(1,i))) / XStar(1,i)
-        ! fStar(1,i) = 1/sqrt(xStar(1,i))
+        ! fStar(1,i) = sqrt(c**2 - (c/strain_ratio(1,i))) / XStar(1,i)
+        fStar(1,i) = c/sqrt(xStar(1,i))
       end do
 
       ! z pressure gradient as a function of x has been determined with the variable strain ratio
