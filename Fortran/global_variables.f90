@@ -40,7 +40,7 @@ module global
   real(dp) :: cp2 = 1630.d0 ! specific heat of fluid 2, [J/(kg K)]
   real(dp) :: Tcrit1 = 154.55d0 ! critical temperature of fluid 1, [K]
   real(dp) :: Tcrit2 = 369.15d0 ! critical temperature of fluid 2, [K]
-  real(dp) :: THp = 800.d0 ! free stream temperature at y = H, [K]
+  real(dp) :: THp = 300.d0 ! free stream temperature at y = H, [K]
   real(dp) :: Vcrit1 = 0.0025d0 ! critical volume of fluid 1, [m3/kg]
   real(dp) :: Vcrit2 = 0.0045d0 ! critical volume of fluid 2, [m3/kg]
   real(dp) :: W1 = 0.032d0 ! molecular weight of fluid 1, [kg/mol]
