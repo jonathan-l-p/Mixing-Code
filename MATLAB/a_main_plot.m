@@ -76,6 +76,9 @@ end
 % plotxchop5Star(AnkKappa,10)
 % xlabel('\kappa_\infty(x_0)L/U_\infty (\rho*\kappa*^2 - \kappa*_\infty)')
 
+plotxchop5Star(kappaStar.*XStar,10)
+xlabel('\kappa* * x*')
+
 %% plot functions
 
 % y vs. a for several x values on the same graph. a can represent any
