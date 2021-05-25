@@ -159,17 +159,19 @@ module IBconditions
 
 
       fStar(1,1:x0ind) = 1.d0
-      c = ( (1.d0/strain_ratio(1,x0ind)) - sqrt((1.d0/((strain_ratio(1,x0ind))**2)) + (4.d0*(XStar(1,x0ind)**2))) )/2.d0
-      ! c = 1.d0
+      ! c = ( (1.d0/strain_ratio(1,x0ind)) - sqrt((1.d0/((strain_ratio(1,x0ind))**2)) + (4.d0*(XStar(1,x0ind)**2))) )/2.d0
+      ! ! c = 1.d0
       ! c = 0.30177d0 ! calculated from Desmos
       do i = x0ind + 1, Nx
         ! fStar(1,i) = sqrt(c**2 - (c/strain_ratio(1,i))) / XStar(1,i)
-        fStar(1,i) = c/xStar(1,i)
+        ! fStar(1,i) = c/xStar(1,i)
+        fStar(1,i) = xStar(1,x0ind)/xStar(1,i)
         ! fStar(1,i) = 1.d0
       end do
 
       do i = x0ind + 1,Nx
-        kappaStar(1,i) = c/xStar(1,i)
+        ! kappaStar(1,i) = c/xStar(1,i)
+        kappaStar(1,i) = xStar(1,x0ind)/xStar(1,i)
         ! kappaStar(1,i) = 1.d0
         kappaStar(Ny,i) = kappaStar(1,i)/FSR_kappa
       end do

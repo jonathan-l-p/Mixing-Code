@@ -116,11 +116,11 @@ module primarycalcs
       end do
 
       ! y = H zero first and second derivative BC
-      kappaStar(1,k+1) = kappaStar(2,k+1)
+      ! kappaStar(1,k+1) = kappaStar(2,k+1)
 
       ! y = -H zero first and second derivative BC
       ! kappaStar(Ny,k+1) = kappaStar(Ny-1,k+1)
-      kappaStar(Ny,k+1) = kappaStar(1,k+1)/FSR_kappa
+      ! kappaStar(Ny,k+1) = kappaStar(1,k+1)/FSR_kappa
 
     end subroutine kappaStarScheme
 end module primarycalcs
