@@ -53,7 +53,7 @@ module primarycalcs
         DOY1_Temp = DO_CentralY(hStar(n2+1,k), hStar(n2-1,k))
         DOY2_Temp = DO_CentralY2_mu(hStar(n2+1,k), hStar(n2,k), &
         hStar(n2-1,k), n2)
-        Ank_Temp = -rhoStar(n2,k)*Q1*ReactionRate1(n2,k) ! rho* Q* omega_F*
+        Ank_Temp = rhoStar(n2,k)*Q1*ReactionRate1(n2,k) ! rho* Q* omega_F*
         c_temp = 1.d0/Pr ! c = 1/Pr
 
         hStar(n2,k+1) = VARnkp1(hStar(n2,k), DOY1_Temp, &

@@ -133,6 +133,7 @@ program mixing
   VarSave(7,1) = FSR_U
   VarSave(8,1) = FSR_h
   VarSave(9,1) = Pr
+  VarSave(10,1) = Da
   call binwritef(VarSave,'out_VarSave.bin')
 
   print*,'Wrote output arrays to .bin files'

@@ -1,7 +1,7 @@
 % a script to define functions for plotting and make plots
 close all
 
-prepath = '/Users/jonathan/Downloads/VariableKappaInf/';
+prepath = '/Users/jonathan/Downloads/';
 SAVEALL = 0;
 
 t1 = ['Pr = ', num2str(Pr), ...

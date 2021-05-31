@@ -39,6 +39,7 @@ x0ind = VarSave(6);
 FSR_U = VarSave(7);
 FSR_h = VarSave(8);
 Pr = VarSave(9);
+Da = VarSave(10);
 
 % determine if f(x) is constant at infinity
 ConstantKappaAtInf = all(fStar == fStar(1));
@@ -78,5 +79,6 @@ if BADIMPORT == false
     fprintf('SR = %.1f\n', strain_ratio)
     fprintf('UR = %.1f\n', FSR_U)
     fprintf('f(x) constant = %i\n', ConstantKappaAtInf)
+    fprintf('Da = %.1f\n', Da)
     fprintf('\n')
 end
