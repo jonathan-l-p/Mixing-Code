@@ -116,7 +116,7 @@ program mixing
   call binwritef_int(Nx_ARRAY,'out_Nx.bin')
   call binwritef_int(Ny_ARRAY,'out_Ny.bin')
 
-  call binwritef(Ank_kappa,'out_Ank_kappa.bin')
+  call binwritef(ReactionRate1,'out_ReactionRate1.bin')
 
   call binwritef(ybar,'out_ybar.bin')
   call binwritef(g_of_x,'out_g_of_x.bin')

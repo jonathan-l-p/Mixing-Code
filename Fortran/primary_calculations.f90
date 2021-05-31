@@ -45,10 +45,15 @@ module primarycalcs
     subroutine hStarScheme()
       ! solve for enthalpy in the next x position along all y
       do n2 = 2, (Ny - 1)
+        ! find reaction rate
+        ReactionRate1(n2,k) = -Da*(rhoStar(n2,k)**0.75d0)*(Y1(n2,k)**1.65d0) &
+        *(Y2(n2,k)**0.1d0)*exp(-EA1/(R1*THp*hStar(n2,k)))
+
+        ! solve for h
         DOY1_Temp = DO_CentralY(hStar(n2+1,k), hStar(n2-1,k))
         DOY2_Temp = DO_CentralY2_mu(hStar(n2+1,k), hStar(n2,k), &
         hStar(n2-1,k), n2)
-        Ank_Temp = 0.d0 ! A = 0,
+        Ank_Temp = -rhoStar(n2,k)*Q1*ReactionRate1(n2,k) ! rho* Q* omega_F*
         c_temp = 1.d0/Pr ! c = 1/Pr
 
         hStar(n2,k+1) = VARnkp1(hStar(n2,k), DOY1_Temp, &

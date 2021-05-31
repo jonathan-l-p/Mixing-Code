@@ -22,7 +22,7 @@ YStar = readfromfortran('out_YStar.bin',Ny,Nx);
 Y1 = readfromfortran('out_Y1.bin',Ny,Nx);
 Y2 = readfromfortran('out_Y2.bin',Ny,Nx);
 
-AnkKappa = readfromfortran('out_Ank_kappa.bin',Ny,Nx);
+ReactionRate1 = readfromfortran('out_ReactionRate1.bin',Ny,Nx);
 
 ybar = readfromfortran('out_ybar.bin',Ny,Nx);
 g_of_x = readfromfortran('out_g_of_x.bin',Ny,Nx);

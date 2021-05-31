@@ -22,12 +22,13 @@ module global
 
   ! under construction
   ! nondimensional input variables
+  real(dp) :: Da = 1346200.d0 ! 134620000.d0 ! non-dimensional Damkohler number, A L rho_inf^0.75 / u_inf
   real(dp) :: F = 3.0d0 ! F = 5.d0 ! factor to ensure that the computational domain is wider than the maximum boundary layer thickness
   real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
   real(dp) :: FSR_u = 4.0d0 ! u_{\infinity} / u_{-\infinity}
   real(dp) :: G = 10.d0 ! G = 10.d0 ! 2.25d0*0.000025d0 ! factor to ensure that the inital boundary layer thickness is smaller than the computational domain
   real(dp) :: Pr = 1.0d0 ! Prandtl number
-  real(dp) :: strain_ratio = 2.d0 ! \kappa_{\infinity}(x0ind) L / U_{\infinity}
+  real(dp) :: strain_ratio = 2.d0 ! \kappa_{\infinity} L / U_{\infinity}
   real(dp) :: Y1Hp = 1.d0 ! free stream composition of fluid 1 at y = H
   real(dp) :: Y1Hn = 0.d0 ! free stream composition of fluid 1 at y = -H
   real(dp) :: Y2Hp = 0.d0 ! free stream composition of fluid 2 at y = H
@@ -38,6 +39,10 @@ module global
   ! fluid2 = PROPANE
   real(dp) :: cp1 = 988.d0 ! specific heat of fluid 1, [J/(kg K)]
   real(dp) :: cp2 = 1630.d0 ! specific heat of fluid 2, [J/(kg K)]
+  real(dp) :: EA1 = 30.d0*4148.d0/0.044097d0 ! activation energy of propane in oxygen [J/kg]
+  real(dp) :: nu = 0.275d0 ! stoichiometric ratio of oxygen and propane
+  real(dp) :: Q1 = 25.0d0 ! normalized heat term for the fuel
+  real(dp) :: R1 = 188.5d0 ! gas constant for propane [J/kg K]
   real(dp) :: Tcrit1 = 154.55d0 ! critical temperature of fluid 1, [K]
   real(dp) :: Tcrit2 = 369.15d0 ! critical temperature of fluid 2, [K]
   real(dp) :: THp = 800.d0 ! free stream temperature at y = H, [K]
@@ -64,6 +69,7 @@ module global
   real(dp) :: mu(Ny,Nx) = 0.d0 ! viscosity on entire domain [kg/(m s)]
   real(dp) :: muHp ! \mu at y = H
   real(dp) :: muStar(Ny,Nx) = 0.d0 ! viscosity on entire domain [DIMENSIONLESS]
+  real(dp) :: ReactionRate1(Ny,Nx) = 0.d0 ! normalized reaction rate of the fuel
   real(dp) :: rhoStar(Ny,Nx) = 0.d0 ! \rho on entire domain [DIMENSIONLESS]
   real(dp) :: T(Ny,Nx) = 0.d0 ! temperature on entire domain [K]
   real(dp) :: UStar(Ny,Nx) = 0.d0, VStar(Ny,Nx) = 0.d0 ! u and v on entire domain [DIMENSIONLESS]
