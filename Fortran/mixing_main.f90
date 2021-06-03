@@ -23,6 +23,7 @@ program mixing
   ! find delta_x_Star and delta_y_Star based on domain size and # of samples
   delta_x_Star = 1.d0/(Nx - 1) ! delta_x / L
   delta_y_Star = -2.d0*F/(Ny-1) ! /sqrt{Re} delta_y / L
+  delta_x_Star_fine = delta_x_Star/float(Nx_fine)
 
   ! check if the proposed domain is stable
   call stability_check()
@@ -52,6 +53,12 @@ program mixing
   ! apply initial and boundary kappa to kappaStar
   call applyIBkappa()
 
+  ! apply initial and boundary reaction rate of
+  call applyIBReactionRate2()
+
+  ! apply boundary conditions to temperary arrays
+  ! call applyIBtemporaryArrays()
+
   ! the domain is now up-to-date with initial and boundary conditions (except for
   ! the kappa boundaries, which we will calculate in the main loop)
   print*,'Set up computational domain with initial and boundary conditions'
@@ -59,6 +66,9 @@ program mixing
 
   ! PRIMARY CALCULATIONS -------------------------------------------------------
   ! MAIN LOOP
+  print*, 'Beginning main loop calculations ...'
+  print*
+
   if (BuildMain .eqv. .true.) then
     do k = 1, (Nx-1) ! take a step in x
       ! we have all the information we need to find Y1, Y2, hstar, and ustar
@@ -70,7 +80,7 @@ program mixing
         exit
       end if
 
-      call hStarScheme()
+      call hStarScheme() ! mechanical operator
       call uStarScheme()
       call kappaStarScheme()
 
@@ -80,21 +90,53 @@ program mixing
 
       ! now we can update vstar
       call vStarScheme()
+
+      ! FINE CALCULATIONS FOR SOURCE TERM
+      ! our hStar is calculated according to the mechanical operator
+      ! now let's calculate it according to the source term operator
+      ! Questions:
+      !   should i update free stream?
+      !   do mass fractionw weighted quantities change now that we have reactants
+
+      ! initialize fine array as the current value in the course array
+      ReactionRate2_fine(:,1) = ReactionRate2(:,k)
+      ! hStar_fine(:,1) = hStar(:,k)
+      ! Y1_fine(:,1) = Y1(:,k)
+      ! Y2_fine(:,1) = Y2(:,k)
+      T_fine(:,1) = T(:,k)
+      rhoStar_fine(:,1) = rhoStar(:,k)
+
+     do k_fine = 1, Nx_fine
+       call sourceTermOperatorScheme()
+     end do
+
+     ! include source term contributions
+     Y1(:,k+1) = Y1(:,k+1) + Y1_fine(:,Nx_fine)
+     Y2(:,k+1) = Y2(:,k+1) + Y2_fine(:,Nx_fine)
+     hStar(:,k+1) = hStar(:,k+1) + hStar_fine(:,Nx_fine)
+     T(:,k+1) = T(:,k+1) + T_fine(:,Nx_fine)
+     rhoStar(:,k+1) = rhoStar(:,k+1) + rhoStar_fine(:,Nx_fine)
+
+     ! print update
+     if (mod(k,100) == 0) then
+       print*, 'k = ',k
+     endif
     end do
 
+    print*
     print*,'Completed main loop calculations'
     print*
   end if
 
   ! Calculate Sirignano variables ----------------------------------------------
-  call calculate_ybar()
-  call calculate_g_of_x()
-  call calculate_eta()
-  call calculate_G_of_eta()
-  call calculate_E()
-
-  print*,'Completed calculations of Sirignano variables'
-  print*
+  ! call calculate_ybar()
+  ! call calculate_g_of_x()
+  ! call calculate_eta()
+  ! call calculate_G_of_eta()
+  ! call calculate_E()
+  !
+  ! print*,'Completed calculations of Sirignano variables'
+  ! print*
 
   ! EXPORT ---------------------------------------------------------------------
   ! write data to binary files in order to analyze in other programs
@@ -116,7 +158,7 @@ program mixing
   call binwritef_int(Nx_ARRAY,'out_Nx.bin')
   call binwritef_int(Ny_ARRAY,'out_Ny.bin')
 
-  call binwritef(ReactionRate1,'out_ReactionRate1.bin')
+  call binwritef(ReactionRate2,'out_ReactionRate2.bin')
 
   call binwritef(ybar,'out_ybar.bin')
   call binwritef(g_of_x,'out_g_of_x.bin')

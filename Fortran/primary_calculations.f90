@@ -9,7 +9,7 @@ module primarycalcs
   use dimensions
   use CleanScheme
   implicit none
-  integer :: n1, n2, n3, n4, n5, n6
+  integer :: n1, n2, n3, n4, n5, n6, n_fine
   real(dp) :: DOY1_Temp, DOY2_Temp, Ank_temp, c_temp
 
   contains
@@ -45,15 +45,11 @@ module primarycalcs
     subroutine hStarScheme()
       ! solve for enthalpy in the next x position along all y
       do n2 = 2, (Ny - 1)
-        ! find reaction rate
-        ReactionRate1(n2,k) = -Da*(rhoStar(n2,k)**0.75d0)*(Y1(n2,k)**1.65d0) &
-        *(Y2(n2,k)**0.1d0)*exp(-EA1/(R1*THp*hStar(n2,k)))
-
         ! solve for h
         DOY1_Temp = DO_CentralY(hStar(n2+1,k), hStar(n2-1,k))
         DOY2_Temp = DO_CentralY2_mu(hStar(n2+1,k), hStar(n2,k), &
         hStar(n2-1,k), n2)
-        Ank_Temp = rhoStar(n2,k)*Q1*ReactionRate1(n2,k) ! rho* Q* omega_F*
+        Ank_Temp = 0.d0 ! no reaction
         c_temp = 1.d0/Pr ! c = 1/Pr
 
         hStar(n2,k+1) = VARnkp1(hStar(n2,k), DOY1_Temp, &
@@ -127,4 +123,31 @@ module primarycalcs
       kappaStar(Ny,k+1) = kappaStar(Ny-1,k+1)
 
     end subroutine kappaStarScheme
+
+    subroutine sourceTermOperatorScheme()
+      do n_fine = 1, Ny ! should the source term change the free streams?
+        ! new parameters
+        hStar_fine(n_fine,k_fine+1) = ( (Q1*ReactionRate2_fine(n_fine,k_fine) &
+        /uStar(n_fine,k)) * delta_x_Star_fine ) + hStar_fine(n_fine,k_fine)
+
+        Y1_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
+        /(uStar(n_fine,k) * nu)) * delta_x_Star_fine ) + Y1_fine(n_fine,k_fine)
+
+        Y2_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
+        /uStar(n_fine,k)) * delta_x_Star_fine ) + Y2_fine(n_fine,k_fine)
+
+        ! update parameters
+        T_fine(n_fine,k_fine+1) = findTemp(findCombCp(Y1_fine(n_fine,k_fine+1),&
+        Y2_fine(n_fine,k_fine+1)),hStar_fine(n_fine,k_fine+1))
+
+        rhoStar_fine(n_fine,k_fine+1) = findRhoStar(T_fine(n_fine,k_fine+1), &
+        Y1_fine(n_fine,k_fine+1),Y2_fine(n_fine,k_fine+1))
+
+        ReactionRate2_fine(n_fine,k_fine+1) = &
+        findReactionRateFuel(rhoStar_fine(n_fine,k_fine+1), &
+        Y1_fine(n_fine,k_fine+1), Y2_fine(n_fine,k_fine+1), &
+        hStar_fine(n_fine,k_fine+1))
+      end do
+    end subroutine sourceTermOperatorScheme
+
 end module primarycalcs

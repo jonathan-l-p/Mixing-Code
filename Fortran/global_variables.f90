@@ -14,6 +14,7 @@ module global
   ! integer, parameter :: Ny = 701
   integer, parameter :: Nx = 40000
   integer, parameter :: Ny = 427 ! 426
+  integer, parameter :: Nx_fine = 25
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301
   integer, parameter :: x0ind = 1 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
@@ -53,6 +54,7 @@ module global
 
   ! DO NOT EDIT parameters - - - - - - -
   integer ::  k ! x-direction index integer for main loop
+  integer ::  k_fine ! fine x-direction index integer for main loop
   integer :: Nx_ARRAY(1,1) = Nx
   integer :: Ny_ARRAY(1,1) = Ny
 
@@ -61,6 +63,7 @@ module global
 
   real(dp) :: Ank_kappa(Ny,Nx) = 0.d0 ! [TEST] for testing the behavior of one of the terms in the kappa equation
   real(dp) :: delta_x_Star, delta_y_Star ! [DIMENSIONLESS]
+  real(dp) :: delta_x_Star_fine
   real(dp) :: FSR_kappa ! \kappa_{\infinity} / \kappa_{-\infinity}
   real(dp) :: fStar(1,Nx) = 0.d0 ! for \kappa equation
   real(dp) :: hStar(Ny,Nx) = 0.d0 ! h on entire domain [DIMENSIONLESS]
@@ -69,7 +72,7 @@ module global
   real(dp) :: mu(Ny,Nx) = 0.d0 ! viscosity on entire domain [kg/(m s)]
   real(dp) :: muHp ! \mu at y = H
   real(dp) :: muStar(Ny,Nx) = 0.d0 ! viscosity on entire domain [DIMENSIONLESS]
-  real(dp) :: ReactionRate1(Ny,Nx) = 0.d0 ! normalized reaction rate of the fuel
+  real(dp) :: ReactionRate2(Ny,Nx) = 0.d0 ! normalized reaction rate of the fuel
   real(dp) :: rhoStar(Ny,Nx) = 0.d0 ! \rho on entire domain [DIMENSIONLESS]
   real(dp) :: T(Ny,Nx) = 0.d0 ! temperature on entire domain [K]
   real(dp) :: UStar(Ny,Nx) = 0.d0, VStar(Ny,Nx) = 0.d0 ! u and v on entire domain [DIMENSIONLESS]
@@ -84,6 +87,14 @@ module global
   real(dp) :: eta(Ny,Nx) = 0.d0
   real(dp) :: G_of_eta(Ny,Nx) = 0.d0
   real(dp) :: E(Ny,Nx) = 0.d0
+
+  ! split operator
+  real(dp) :: ReactionRate2_fine(Ny,Nx) = 0.d0
+  real(dp) :: hStar_fine(Ny,Nx_fine+1) = 0.d0
+  real(dp) :: Y1_fine(Ny,Nx_fine+1) = 0.d0
+  real(dp) :: Y2_fine(Ny,Nx_fine+1) = 0.d0
+  real(dp) :: T_fine(Ny,Nx_fine+1) = 0.d0
+  real(dp) :: rhoStar_fine(Ny,Nx_fine+1) = 0.d0
   ! - - - - - - -
 
 end module global

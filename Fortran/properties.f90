@@ -103,4 +103,16 @@ module properties
       findRhoStar = (THp/T)*(MolWeightComb/W1) ! [Dimensionless]
     end function findRhoStar
 
+    ! reaction rate of fuel
+    real(dp) function findReactionRateFuel(rhostar,Y1,Y2,hstar)
+      real(dp), intent(in) :: rhostar
+      real(dp), intent(in) :: Y1
+      real(dp), intent(in) :: Y2
+      real(dp), intent(in) :: hstar
+
+      findReactionRateFuel = -Da*(rhostar**0.75d0)*(Y1**1.65d0) &
+      *(Y2**0.1d0)*exp(-EA1/(R1*THp*hStar))
+
+    end function findReactionRateFuel
+
 end module properties

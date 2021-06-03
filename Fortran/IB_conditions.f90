@@ -145,4 +145,39 @@ module IBconditions
 
     end subroutine applyIBkappa
 
+    subroutine applyIBReactionRate2()
+      do i = 1,Ny
+        ReactionRate2(i,1) = findReactionRateFuel(rhoStar(i,1),Y1(i,1), &
+        Y2(i,1),hStar(i,1))
+      end do
+
+      ! do i = 1,Nx
+      !   ReactionRate2(1,i) = findReactionRateFuel(rhoStar(1,i),Y1(1,i), &
+      !   Y2(1,i),hStar(1,i))
+      !   ReactionRate2(Ny,i) = findReactionRateFuel(rhoStar(Ny,i),Y1(Ny,i), &
+      !   Y2(Ny,i),hStar(Ny,i))
+      ! end do
+    end subroutine applyIBReactionRate2
+
+    subroutine applyIBtemporaryArrays()
+      ! apply boundary conditions to temporary arrays
+      ReactionRate2_fine(1,:) = ReactionRate2(1,1)
+      ReactionRate2_fine(Ny,:) = ReactionRate2(Ny,1)
+
+      hStar_fine(1,:) = hStar(1,1)
+      hStar_fine(Ny,:) = hStar(Ny,1)
+
+      Y1_fine(1,:) = Y1(1,1)
+      Y1_fine(Ny,:) = Y1(Ny,1)
+
+      Y2_fine(1,:) = Y1(1,1)
+      Y2_fine(Ny,:) = Y1(Ny,1)
+
+      T_fine(1,:) = T(1,1)
+      T_fine(Ny,:) = T(Ny,1)
+
+      rhoStar_fine(1,:) = rhoStar(1,1)
+      rhoStar_fine(Ny,:) = rhoStar(Ny,1)
+    end subroutine applyIBtemporaryArrays
+
 end module IBconditions
