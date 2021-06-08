@@ -91,31 +91,31 @@ program mixing
       ! now we can update vstar
       call vStarScheme()
 
-      ! FINE CALCULATIONS FOR SOURCE TERM
-      ! our hStar is calculated according to the mechanical operator
-      ! now let's calculate it according to the source term operator
-      ! Questions:
-      !   should i update free stream?
-      !   do mass fractionw weighted quantities change now that we have reactants
-
-      ! initialize fine array as the current value in the course array
-      ReactionRate2_fine(:,1) = ReactionRate2(:,k)
-      ! hStar_fine(:,1) = hStar(:,k)
-      ! Y1_fine(:,1) = Y1(:,k)
-      ! Y2_fine(:,1) = Y2(:,k)
-      T_fine(:,1) = T(:,k)
-      rhoStar_fine(:,1) = rhoStar(:,k)
-
-     do k_fine = 1, Nx_fine
-       call sourceTermOperatorScheme()
-     end do
-
-     ! include source term contributions
-     Y1(:,k+1) = Y1(:,k+1) + Y1_fine(:,Nx_fine)
-     Y2(:,k+1) = Y2(:,k+1) + Y2_fine(:,Nx_fine)
-     hStar(:,k+1) = hStar(:,k+1) + hStar_fine(:,Nx_fine)
-     T(:,k+1) = T(:,k+1) + T_fine(:,Nx_fine)
-     rhoStar(:,k+1) = rhoStar(:,k+1) + rhoStar_fine(:,Nx_fine)
+     !  ! FINE CALCULATIONS FOR SOURCE TERM
+     !  ! our hStar is calculated according to the mechanical operator
+     !  ! now let's calculate it according to the source term operator
+     !  ! Questions:
+     !  !   should i update free stream?
+     !  !   do mass fractionw weighted quantities change now that we have reactants
+     !
+     !  ! initialize fine array as the current value in the course array
+     !  ReactionRate2_fine(:,1) = ReactionRate2(:,k)
+     !  ! hStar_fine(:,1) = hStar(:,k)
+     !  ! Y1_fine(:,1) = Y1(:,k)
+     !  ! Y2_fine(:,1) = Y2(:,k)
+     !  T_fine(:,1) = T(:,k)
+     !  rhoStar_fine(:,1) = rhoStar(:,k)
+     !
+     ! do k_fine = 1, Nx_fine
+     !   call sourceTermOperatorScheme()
+     ! end do
+     ! 
+     ! ! include source term contributions
+     ! Y1(:,k+1) = Y1(:,k+1) + Y1_fine(:,Nx_fine)
+     ! Y2(:,k+1) = Y2(:,k+1) + Y2_fine(:,Nx_fine)
+     ! hStar(:,k+1) = hStar(:,k+1) + hStar_fine(:,Nx_fine)
+     ! T(:,k+1) = T(:,k+1) + T_fine(:,Nx_fine)
+     ! rhoStar(:,k+1) = rhoStar(:,k+1) + rhoStar_fine(:,Nx_fine)
 
      ! print update
      if (mod(k,100) == 0) then

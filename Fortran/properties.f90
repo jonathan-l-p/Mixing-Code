@@ -73,13 +73,13 @@ module properties
       findMuStar = mu/muHp
     end function findMuStar
 
-    ! function to find the combined Cp for mixed fluids
-    real(dp) function findCombCp(Y1,Y2)
-      real(dp), intent(in) :: Y1
-      real(dp), intent(in) :: Y2
-
-      findCombCp = (Y1*cp1) + (Y2*cp2) ! [J/(kg K)]
-    end function findCombCp
+    ! ! function to find the combined Cp for mixed fluids
+    ! real(dp) function findCombCp(Y1,Y2)
+    !   real(dp), intent(in) :: Y1
+    !   real(dp), intent(in) :: Y2
+    !
+    !   findCombCp = (Y1*cp1) + (Y2*cp2) ! [J/(kg K)]
+    ! end function findCombCp
 
     ! find temperature of mixed fluids as a function of normalized enthalpy
     ! * pure composition of free stream assumption
@@ -87,7 +87,8 @@ module properties
       real(dp), intent(in) :: cp ! combined spefic heat of pressure
       real(dp), intent(in) :: hstar ! normalized enthalpy
 
-      findTemp = cp1*THp*hstar/cp ! [K]
+      ! findTemp = cp1*THp*hstar/cp ! [K]
+      findTemp = cp*THp*hstar/cp ! [K]
     end function findTemp
 
     ! find density of mixed fluids based on temperature and composition

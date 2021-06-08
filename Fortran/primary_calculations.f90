@@ -137,8 +137,7 @@ module primarycalcs
         /uStar(n_fine,k)) * delta_x_Star_fine ) + Y2_fine(n_fine,k_fine)
 
         ! update parameters
-        T_fine(n_fine,k_fine+1) = findTemp(findCombCp(Y1_fine(n_fine,k_fine+1),&
-        Y2_fine(n_fine,k_fine+1)),hStar_fine(n_fine,k_fine+1))
+        T_fine(n_fine,k_fine+1) = findTemp(cp,hStar_fine(n_fine,k_fine+1))
 
         rhoStar_fine(n_fine,k_fine+1) = findRhoStar(T_fine(n_fine,k_fine+1), &
         Y1_fine(n_fine,k_fine+1),Y2_fine(n_fine,k_fine+1))
