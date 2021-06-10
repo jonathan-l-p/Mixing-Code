@@ -53,7 +53,7 @@ module IBconditions
     subroutine applyIBTemp()
       ! define temperature for all y at x = 0
       do i = 1,Ny
-        T(i,1) = findTemp(cp,hStar(i,1))
+        T(i,1) = findTemp(hStar(i,1))
       end do
 
       ! apply Thp to y=H
@@ -151,12 +151,12 @@ module IBconditions
         Y2(i,1),hStar(i,1))
       end do
 
-      ! do i = 1,Nx
-      !   ReactionRate2(1,i) = findReactionRateFuel(rhoStar(1,i),Y1(1,i), &
-      !   Y2(1,i),hStar(1,i))
-      !   ReactionRate2(Ny,i) = findReactionRateFuel(rhoStar(Ny,i),Y1(Ny,i), &
-      !   Y2(Ny,i),hStar(Ny,i))
-      ! end do
+      do i = 1,Nx
+        ReactionRate2(1,i) = findReactionRateFuel(rhoStar(1,i),Y1(1,i), &
+        Y2(1,i),hStar(1,i))
+        ReactionRate2(Ny,i) = findReactionRateFuel(rhoStar(Ny,i),Y1(Ny,i), &
+        Y2(Ny,i),hStar(Ny,i))
+      end do
     end subroutine applyIBReactionRate2
 
     subroutine applyIBtemporaryArrays()
@@ -178,6 +178,9 @@ module IBconditions
 
       rhoStar_fine(1,:) = rhoStar(1,1)
       rhoStar_fine(Ny,:) = rhoStar(Ny,1)
+
+      muStar_fine(1,:) = muStar(1,1)
+      muStar_fine(Ny,:) = muStar(Ny,1)
     end subroutine applyIBtemporaryArrays
 
 end module IBconditions

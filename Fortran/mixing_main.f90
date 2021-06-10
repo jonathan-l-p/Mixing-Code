@@ -69,8 +69,8 @@ program mixing
   print*, 'Beginning main loop calculations ...'
   print*
 
-  if (BuildMain .eqv. .true.) then
-    do k = 1, (Nx-1) ! take a step in x
+  if (BuildMain) then
+    do k = 1, (Nx-1) ! take a step in x - - - - - - - - - -
       ! we have all the information we need to find Y1, Y2, hstar, and ustar
       call compScheme()
 
@@ -80,9 +80,41 @@ program mixing
         exit
       end if
 
-      call hStarScheme() ! mechanical operator
+      ! COURSE CALCULATIONS
+      ! add the change due to pure mixing to (k + 1)
+
+      call hStarScheme()
       call uStarScheme()
       call kappaStarScheme()
+
+      if (React) then
+        ! FINE CALCULATIONS FOR SOURCE TERM
+        ! the change due to mixing has already been added to (k + 1),
+        ! now add the change due to reacting but no mixing
+
+         ! initialize fine array as the current value in the course array
+         ReactionRate2_fine(:,1) = ReactionRate2(:,k)
+         hStar_fine(:,1) = hStar(:,k)
+         Y1_fine(:,1) = Y1(:,k)
+         Y2_fine(:,1) = Y2(:,k)
+         T_fine(:,1) = T(:,k)
+         rhoStar_fine(:,1) = rhoStar(:,k)
+         muStar_fine(:,1) = muStar(:,k)
+
+        do k_fine = 1, Nx_fine
+          call sourceTermOperatorScheme()
+        end do
+
+        ! include source term contributions
+        ! (a_fine(:,Nx_fine+1) - a_fine(:,1)) is the change due only to reacting
+        Y1(:,k+1) = Y1(:,k+1) + (Y1_fine(:,Nx_fine+1) - Y1_fine(:,1))
+        Y2(:,k+1) = Y2(:,k+1) + (Y2_fine(:,Nx_fine+1) - Y2_fine(:,1))
+        hStar(:,k+1) = hStar(:,k+1) + (hStar_fine(:,Nx_fine+1) - hStar_fine(:,1))
+        ! T(:,k+1) = T(:,k+1) + (T_fine(:,Nx_fine+1) - T_fine(:,1))
+        ! rhoStar(:,k+1) = rhoStar(:,k+1) + (rhoStar_fine(:,Nx_fine+1) - rhoStar_fine(:,1))
+        ! muStar(:,k+1) = muStar(:,k+1) + (muStar_fine(:,Nx_fine+1) - muStar_fine(:,1))
+        ReactionRate2(:,k+1) = ReactionRate2_fine(:,Nx_fine+1)
+      end if
 
       ! new vstar needs new density so we must update density at x + delta_x
       ! update domain quantities
@@ -91,37 +123,12 @@ program mixing
       ! now we can update vstar
       call vStarScheme()
 
-     !  ! FINE CALCULATIONS FOR SOURCE TERM
-     !  ! our hStar is calculated according to the mechanical operator
-     !  ! now let's calculate it according to the source term operator
-     !  ! Questions:
-     !  !   should i update free stream?
-     !  !   do mass fractionw weighted quantities change now that we have reactants
-     !
-     !  ! initialize fine array as the current value in the course array
-     !  ReactionRate2_fine(:,1) = ReactionRate2(:,k)
-     !  ! hStar_fine(:,1) = hStar(:,k)
-     !  ! Y1_fine(:,1) = Y1(:,k)
-     !  ! Y2_fine(:,1) = Y2(:,k)
-     !  T_fine(:,1) = T(:,k)
-     !  rhoStar_fine(:,1) = rhoStar(:,k)
-     !
-     ! do k_fine = 1, Nx_fine
-     !   call sourceTermOperatorScheme()
-     ! end do
-     ! 
-     ! ! include source term contributions
-     ! Y1(:,k+1) = Y1(:,k+1) + Y1_fine(:,Nx_fine)
-     ! Y2(:,k+1) = Y2(:,k+1) + Y2_fine(:,Nx_fine)
-     ! hStar(:,k+1) = hStar(:,k+1) + hStar_fine(:,Nx_fine)
-     ! T(:,k+1) = T(:,k+1) + T_fine(:,Nx_fine)
-     ! rhoStar(:,k+1) = rhoStar(:,k+1) + rhoStar_fine(:,Nx_fine)
-
      ! print update
      if (mod(k,100) == 0) then
        print*, 'k = ',k
      endif
-    end do
+    end do ! - - - - - - - - - -
+
 
     print*
     print*,'Completed main loop calculations'
@@ -157,16 +164,25 @@ program mixing
   call binwritef(Y2,'out_Y2.bin')
   call binwritef_int(Nx_ARRAY,'out_Nx.bin')
   call binwritef_int(Ny_ARRAY,'out_Ny.bin')
-
   call binwritef(ReactionRate2,'out_ReactionRate2.bin')
 
+  ! Sirignano variables
   call binwritef(ybar,'out_ybar.bin')
   call binwritef(g_of_x,'out_g_of_x.bin')
   call binwritef(eta,'out_eta.bin')
   call binwritef(G_of_eta,'out_G_of_eta.bin')
   call binwritef(E,'out_E.bin')
 
-  ! VARIABLE SAVES - - - - - - -
+  ! fine mesh data
+  call binwritef(ReactionRate2_fine,'out_ReactionRate2_fine.bin')
+  call binwritef(hStar_fine,'out_hStar_fine.bin')
+  call binwritef(Y1_fine,'out_Y1_fine.bin')
+  call binwritef(Y2_fine,'out_Y2_fine.bin')
+  call binwritef(T_fine,'out_T_fine.bin')
+  call binwritef(rhoStar_fine,'out_rhoStar_fine.bin')
+    call binwritef(muStar_fine,'out_muStar_fine.bin')
+
+  ! SCALAR SAVES - - - - - - -
   VarSave(2,1) = delta_x_Star
   VarSave(3,1) = delta_y_Star
   VarSave(4,1) = FSR_kappa

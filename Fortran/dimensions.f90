@@ -16,9 +16,9 @@ module dimensions
       real(dp) :: mu1temp
       real(dp) :: mu2temp
 
-      do i = 2,Ny-1
+      do i = 1,Ny
         ! VERY IMPORTANT UPDATES
-        T(i,k+1) = findTemp(cp,hStar(i,k+1))
+        T(i,k+1) = findTemp(hStar(i,k+1))
 
         mu1temp = findMu(T(i,k+1),Tcrit1,Vcrit1,W1)
         mu2temp = findMu(T(i,k+1),Tcrit2,Vcrit2,W2)
@@ -26,6 +26,9 @@ module dimensions
         muStar(i,k+1) = mu(i,k+1)/muHp
 
         rhoStar(i,k+1) = findRhoStar(T(i,k+1),Y1(i,k+1),Y2(i,k+1))
+
+        ReactionRate2(i,k+1) = findReactionRateFuel(rhoStar(i,k+1),Y1(i,k+1), &
+        Y2(i,k+1),hStar(i,k+1))
       end do
     end subroutine updateDomain
 

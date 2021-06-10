@@ -83,12 +83,11 @@ module properties
 
     ! find temperature of mixed fluids as a function of normalized enthalpy
     ! * pure composition of free stream assumption
-    real(dp) function findTemp(cp,hstar)
-      real(dp), intent(in) :: cp ! combined spefic heat of pressure
+    real(dp) function findTemp(hstar)
       real(dp), intent(in) :: hstar ! normalized enthalpy
 
       ! findTemp = cp1*THp*hstar/cp ! [K]
-      findTemp = cp*THp*hstar/cp ! [K]
+      findTemp = THp*hstar ! [K]
     end function findTemp
 
     ! find density of mixed fluids based on temperature and composition

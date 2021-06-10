@@ -73,8 +73,11 @@ if SAVEALL
 end
 % saveas(gcf,strcat([prepath,'kappastar(y).png']))
 
-% plotxchop5Star(AnkKappa,10)
-% xlabel('\kappa_\infty(x_0)L/U_\infty (\rho*\kappa*^2 - \kappa*_\infty)')
+plotxchop5Star(ReactionRate2,10)
+xlabel('\omega_2')
+if SAVEALL
+    saveas(gcf,strcat([prepath,'omega2star(y).png']))
+end
 
 %% plot functions
 

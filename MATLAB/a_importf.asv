@@ -21,18 +21,9 @@ XStar = readfromfortran('out_XStar.bin',Ny,Nx);
 YStar = readfromfortran('out_YStar.bin',Ny,Nx);
 Y1 = readfromfortran('out_Y1.bin',Ny,Nx);
 Y2 = readfromfortran('out_Y2.bin',Ny,Nx);
-ReactionRate2 = readfromfortran('out_ReactionRate2.bin',Ny,Nx);
 
-% fine mesh data
-ReactionRate2_fine = readfromfortran('out_ReactionRate2_fine.bin',Ny,Nx);
-hStar_fine = readfromfortran('out_hStar_fine.bin',Ny,Nx);
-Y1_fine = readfromfortran('out_Y1_fine.bin',Ny,Nx);
-Y2_fine = readfromfortran('out_Y2_fine.bin',Ny,Nx);
-T_fine = readfromfortran('out_T_fine.bin',Ny,Nx);
-rhoStar_fine = readfromfortran('out_rhoStar_fine.bin',Ny,Nx);
-muStar_fine = readfromfortran('out_muStar_fine.bin',Ny,Nx);
 
-% Sirignano variables
+% Sirign
 ybar = readfromfortran('out_ybar.bin',Ny,Nx);
 g_of_x = readfromfortran('out_g_of_x.bin',Ny,Nx);
 eta = readfromfortran('out_eta.bin',Ny,Nx);

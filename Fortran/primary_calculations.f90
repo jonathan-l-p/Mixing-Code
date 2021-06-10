@@ -3,11 +3,13 @@
 ! uses realprecision module
 ! uses dimensions module
 ! uses CleanScheme module
+! uses properites module
 module primarycalcs
   use global
   use realprecision
   use dimensions
   use CleanScheme
+  use properties
   implicit none
   integer :: n1, n2, n3, n4, n5, n6, n_fine
   real(dp) :: DOY1_Temp, DOY2_Temp, Ank_temp, c_temp
@@ -127,20 +129,36 @@ module primarycalcs
     subroutine sourceTermOperatorScheme()
       do n_fine = 1, Ny ! should the source term change the free streams?
         ! new parameters
-        hStar_fine(n_fine,k_fine+1) = ( (Q1*ReactionRate2_fine(n_fine,k_fine) &
+        hStar_fine(n_fine,k_fine+1) = ( (-Q1*ReactionRate2_fine(n_fine,k_fine) &
         /uStar(n_fine,k)) * delta_x_Star_fine ) + hStar_fine(n_fine,k_fine)
 
-        Y1_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
-        /(uStar(n_fine,k) * nu)) * delta_x_Star_fine ) + Y1_fine(n_fine,k_fine)
+        ! Y1_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
+        ! /(uStar(n_fine,k) * nu)) * delta_x_Star_fine ) + Y1_fine(n_fine,k_fine)
+        !
+        ! Y2_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
+        ! /(uStar(n_fine,k) )) * delta_x_Star_fine ) + Y2_fine(n_fine,k_fine)
 
-        Y2_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
-        /uStar(n_fine,k)) * delta_x_Star_fine ) + Y2_fine(n_fine,k_fine)
+        Y1_fine(n_fine,k_fine+1) = Y1(n_fine,k)
+        Y2_fine(n_fine,k_fine+1) = Y2(n_fine,k)
+
+        ! if (Y1_fine(n_fine,k_fine+1) < 0.0d0) then
+        !   Y1_fine(n_fine,k_fine+1) = 0.0d0
+        ! endif
+        !
+        ! if (Y2_fine(n_fine,k_fine+1) < 0.0d0) then
+        !   Y2_fine(n_fine,k_fine+1) = 0.0d0
+        ! endif
 
         ! update parameters
-        T_fine(n_fine,k_fine+1) = findTemp(cp,hStar_fine(n_fine,k_fine+1))
+        T_fine(n_fine,k_fine+1) = findTemp(hStar_fine(n_fine,k_fine+1))
 
         rhoStar_fine(n_fine,k_fine+1) = findRhoStar(T_fine(n_fine,k_fine+1), &
         Y1_fine(n_fine,k_fine+1),Y2_fine(n_fine,k_fine+1))
+
+        muStar_fine(n_fine,k_fine+1) = findCombMu(Y1_fine(n_fine,k_fine+1) , &
+        findMu(T_fine(n_fine,k_fine+1),Tcrit1,Vcrit1,W1) , &
+        Y2(n_fine,k_fine+1) , &
+        findMu(T_fine(n_fine,k_fine+1),Tcrit2,Vcrit2,W2) ) / muHp
 
         ReactionRate2_fine(n_fine,k_fine+1) = &
         findReactionRateFuel(rhoStar_fine(n_fine,k_fine+1), &

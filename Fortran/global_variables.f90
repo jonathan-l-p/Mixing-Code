@@ -14,13 +14,13 @@ module global
   ! integer, parameter :: Ny = 701
   integer, parameter :: Nx = 40000
   integer, parameter :: Ny = 427 ! 426
-  integer, parameter :: Nx_fine = 25
+  integer, parameter :: Nx_fine = 10
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301
   integer, parameter :: x0ind = 1 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
 
   logical :: BuildMain = .true. ! logical variable to determine whether or not the run the main loop
-
+  logical :: React = .true. ! model reactions?
   ! under construction
   ! nondimensional input variables
   real(dp) :: Da = 900000.d0 ! 134620000.d0 ! non-dimensional Damkohler number, A L rho_inf^0.75 / u_inf
@@ -90,12 +90,13 @@ module global
   real(dp) :: E(Ny,Nx) = 0.d0
 
   ! split operator
-  real(dp) :: ReactionRate2_fine(Ny,Nx) = 0.d0
+  real(dp) :: ReactionRate2_fine(Ny,Nx_fine+1) = 0.d0
   real(dp) :: hStar_fine(Ny,Nx_fine+1) = 0.d0
   real(dp) :: Y1_fine(Ny,Nx_fine+1) = 0.d0
   real(dp) :: Y2_fine(Ny,Nx_fine+1) = 0.d0
   real(dp) :: T_fine(Ny,Nx_fine+1) = 0.d0
   real(dp) :: rhoStar_fine(Ny,Nx_fine+1) = 0.d0
+  real(dp) :: muStar_fine(Ny,Nx_fine+1) = 0.d0
   ! - - - - - - -
 
 end module global
