@@ -80,6 +80,11 @@ program mixing
 
       ! now we can update vstar
       call vStarScheme()
+
+      ! print update
+      if (mod(k,100) == 0) then
+        print*, 'k = ',k
+      endif
     end do
 
     print*,'Completed main loop calculations'
