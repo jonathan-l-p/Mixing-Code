@@ -53,7 +53,7 @@ module IBconditions
     subroutine applyIBTemp()
       ! define temperature for all y at x = 0
       do i = 1,Ny
-        T(i,1) = findTemp(findCombCp(Y1(i,1),Y2(i,1)),hStar(i,1))
+        T(i,1) = findTemp(hStar(i,1))
       end do
 
       ! apply Thp to y=H

@@ -86,15 +86,15 @@ program mixing
     print*
   end if
 
-  ! Calculate Sirignano variables ----------------------------------------------
-  call calculate_ybar()
-  call calculate_g_of_x()
-  call calculate_eta()
-  call calculate_G_of_eta()
-  call calculate_E()
-
-  print*,'Completed calculations of Sirignano variables'
-  print*
+  ! ! Calculate Sirignano variables ----------------------------------------------
+  ! call calculate_ybar()
+  ! call calculate_g_of_x()
+  ! call calculate_eta()
+  ! call calculate_G_of_eta()
+  ! call calculate_E()
+  !
+  ! print*,'Completed calculations of Sirignano variables'
+  ! print*
 
   ! EXPORT ---------------------------------------------------------------------
   ! write data to binary files in order to analyze in other programs

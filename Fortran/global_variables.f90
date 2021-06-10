@@ -39,6 +39,7 @@ module global
   ! fluid2 = PROPANE
   real(dp) :: cp1 = 988.d0 ! specific heat of fluid 1, [J/(kg K)]
   real(dp) :: cp2 = 1630.d0 ! specific heat of fluid 2, [J/(kg K)]
+  real(dp) :: cp = 1309.d0 ! average specific heat of fluid 1 and 2, [J/(kg K)]
   real(dp) :: EA1 = 30.d0*4148.d0/0.044097d0 ! activation energy of propane in oxygen [J/kg]
   real(dp) :: nu = 0.275d0 ! stoichiometric ratio of oxygen and propane
   real(dp) :: Q1 = 25.0d0 ! normalized heat term for the fuel
