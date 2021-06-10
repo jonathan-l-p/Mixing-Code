@@ -12,7 +12,7 @@ module global
   ! integer, parameter :: Ny = 853
   ! integer, parameter :: Nx = 27500
   ! integer, parameter :: Ny = 701
-  integer, parameter :: Nx = 40000
+  integer, parameter :: Nx = 400000
   integer, parameter :: Ny = 427 ! 426
   ! integer, parameter :: Nx = 20000
   ! integer, parameter :: Ny = 301

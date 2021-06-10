@@ -1,0 +1,10 @@
+clear, clc, close all
+
+load('/Users/jonathan/Desktop/SplitOperator.mat', 'LineWidth', 2)
+plot(hStar(:,end)); hold on
+
+clear, clc
+
+load('/Users/jonathan/Desktop/NoSplitOperator.mat', 'LineWidth', 2)
+plot(hStar(:,end))
+legend('split operator', 'no split operator')
