@@ -74,7 +74,7 @@ program mixing
       ! we have all the information we need to find Y1, Y2, hstar, and ustar
       call compScheme()
 
-      if (BreakLoop .eqv. .true.) then
+      if ( BreakLoop ) then
         print*,'Calculations failed at k =', k
         print*
         exit
@@ -115,6 +115,24 @@ program mixing
         ! muStar(:,k+1) = muStar(:,k+1) + (muStar_fine(:,Nx_fine+1) - muStar_fine(:,1))
         ReactionRate2(:,k+1) = ReactionRate2_fine(:,Nx_fine+1)
       end if
+
+      ! make sure mass fractions are not negative
+      do n = 1, Ny
+        if ( Y1(n,k+1) < 0.d0 ) then
+          Y1(n,k+1) = 0.0d0
+        end if
+
+        if ( Y2(n,k+1) < 0.d0 ) then
+          Y2(n,k+1) = 0.0d0
+        end if
+      end do
+
+      ! check for if to stop code
+      do n = 1, Ny
+        if ( ( isnan(Y1(n,k+1)) ) .or. ( isnan(Y2(n,k+1)) ) ) then
+          BreakLoop = .true.
+        end if
+      end do
 
       ! new vstar needs new density so we must update density at x + delta_x
       ! update domain quantities
