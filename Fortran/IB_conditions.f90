@@ -53,7 +53,7 @@ module IBconditions
     subroutine applyIBTemp()
       ! define temperature for all y at x = 0
       do i = 1,Ny
-        T(i,1) = findTemp(findCombCp(Y1(i,1),Y2(i,1)),hStar(i,1))
+        T(i,1) = findTemp(hStar(i,1))
       end do
 
       ! apply Thp to y=H
@@ -169,12 +169,12 @@ module IBconditions
         ! fStar(1,i) = 1.d0
       end do
 
-      do i = x0ind + 1,Nx
-        ! kappaStar(1,i) = c/xStar(1,i)
-        kappaStar(1,i) = xStar(1,x0ind)/xStar(1,i)
-        ! kappaStar(1,i) = 1.d0
-        kappaStar(Ny,i) = kappaStar(1,i)/FSR_kappa
-      end do
+      ! do i = x0ind + 1,Nx
+      !   ! kappaStar(1,i) = c/xStar(1,i)
+      !   kappaStar(1,i) = xStar(1,x0ind)/xStar(1,i)
+      !   ! kappaStar(1,i) = 1.d0
+      !   kappaStar(Ny,i) = kappaStar(1,i)/FSR_kappa
+      ! end do
 
       ! z pressure gradient as a function of x has been determined with the variable strain ratio
 

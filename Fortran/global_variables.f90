@@ -36,8 +36,9 @@ module global
   ! dimensional input variables
   ! fluid1 = OXYGEN
   ! fluid2 = PROPANE
-  real(dp) :: cp1 = 988.d0 ! specific heat of fluid 1, [J/(kg K)]
-  real(dp) :: cp2 = 1630.d0 ! specific heat of fluid 2, [J/(kg K)]
+  ! real(dp) :: cp1 = 988.d0 ! specific heat of fluid 1, [J/(kg K)]
+  ! real(dp) :: cp2 = 1630.d0 ! specific heat of fluid 2, [J/(kg K)]
+  real(dp) :: cp = 1309.d0 ! mean specific heat of both fluid 1 and fluid 2 [J/(kg K)]
   real(dp) :: nu = 0.275d0 ! stoichiometric ratio of fluid 2 to fluid 1 by mass
   real(dp) :: Q = 30.d0 ! heating value of the fuel []
   real(dp) :: Tcrit1 = 154.55d0 ! critical temperature of fluid 1, [K]

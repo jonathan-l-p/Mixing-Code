@@ -18,7 +18,7 @@ module dimensions
 
       do i = 2,Ny-1
         ! VERY IMPORTANT UPDATES
-        T(i,k+1) = findTemp(findCombCp(Y1(i,k+1),Y2(i,k+1)),hStar(i,k+1))
+        T(i,k+1) = findTemp(hStar(i,k+1))
 
         mu1temp = findMu(T(i,k+1),Tcrit1,Vcrit1,W1)
         mu2temp = findMu(T(i,k+1),Tcrit2,Vcrit2,W2)
@@ -28,5 +28,5 @@ module dimensions
         rhoStar(i,k+1) = findRhoStar(T(i,k+1),Y1(i,k+1),Y2(i,k+1))
       end do
     end subroutine updateDomain
-    
+
 end module dimensions
