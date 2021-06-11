@@ -1,0 +1,11 @@
+clear, clc, close all
+
+load('/Users/jonathan/Desktop/SplitOperator.mat')
+plot(hStar(:,end), YStar(:,1), 'LineWidth', 2); hold on
+
+clear, clc
+
+load('/Users/jonathan/Desktop/NoSplitOperator.mat')
+plot(hStar(:,end), YStar(:,1), '--', 'LineWidth', 2)
+legend('split operator', 'no split operator')
+grid on
