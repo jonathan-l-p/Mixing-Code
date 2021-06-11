@@ -129,13 +129,13 @@ module IBconditions
 
     subroutine applyIBkappa()
       ! define strain ratio from 0 to x(x0ind)
-      do i = 1, x0ind
+      do i = 1, Nx ! x0ind
         strain_ratio(1,i) = G_inf/(2.d0 * XStar(1,x0ind))
       end do
 
-      do i = x0ind + 1,Nx
-        strain_ratio(1,i) = G_inf/(2.d0 * XStar(1,i))
-      end do
+      ! do i = x0ind + 1,Nx
+      !   strain_ratio(1,i) = G_inf/(2.d0 * XStar(1,i))
+      ! end do
 
       ! strain ratio as a function of x has been determined
 
@@ -169,12 +169,12 @@ module IBconditions
         ! fStar(1,i) = 1.d0
       end do
 
-      ! do i = x0ind + 1,Nx
-      !   ! kappaStar(1,i) = c/xStar(1,i)
-      !   kappaStar(1,i) = xStar(1,x0ind)/xStar(1,i)
-      !   ! kappaStar(1,i) = 1.d0
-      !   kappaStar(Ny,i) = kappaStar(1,i)/FSR_kappa
-      ! end do
+      do i = x0ind + 1,Nx
+        ! kappaStar(1,i) = c/xStar(1,i)
+        kappaStar(1,i) = xStar(1,x0ind)/xStar(1,i)
+        ! kappaStar(1,i) = 1.d0
+        kappaStar(Ny,i) = kappaStar(1,i)/FSR_kappa
+      end do
 
       ! z pressure gradient as a function of x has been determined with the variable strain ratio
 
