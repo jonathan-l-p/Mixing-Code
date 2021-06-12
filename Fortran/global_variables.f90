@@ -23,7 +23,7 @@ module global
   logical :: React = .true. ! model reactions?
   ! under construction
   ! nondimensional input variables
-  real(dp) :: Da = 10000000.d0 ! 134620000.d0 ! non-dimensional Damkohler number, A L rho_inf^0.75 / u_inf
+  real(dp) :: Da = 1000000.d0 ! 134620000.d0 ! non-dimensional Damkohler number, A L rho_inf^0.75 / u_inf
   real(dp) :: F = 3.0d0 ! F = 5.d0 ! factor to ensure that the computational domain is wider than the maximum boundary layer thickness
   real(dp) :: FSR_h = 1.5d0 ! h_{\infinity} / h_{-\infinity}
   real(dp) :: FSR_u = 4.0d0 ! u_{\infinity} / u_{-\infinity}

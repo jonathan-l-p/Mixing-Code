@@ -104,6 +104,8 @@ i5 = Nx;
 
 
 figure(n)
+% font size
+set(0,'DefaultAxesFontSize',25)
 hold on
 
 % plot a(y) at 6 x values
@@ -126,6 +128,7 @@ legend(l1, l2, l3, l4, l5, 'Location', 'Best')
 % label y axis
 ylabel('y*')
 
-% font size
-set(gca,'FontSize',18)
+% grid on
+grid on
+
 end
