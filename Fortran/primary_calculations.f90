@@ -35,13 +35,6 @@ module primarycalcs
 
         Y2(n1,k+1) = VARnkp1(Y2(n1,k), DOY1_Temp, DOY2_Temp, Ank_Temp, c_temp, &
         n1)
-
-        ! ! stop computations if either Y is negative
-        ! if ((Y1(n1,k+1) < 0.d0) .or. (Y2(n1,k+1) < 0.d0)) then
-        !   BreakLoop = .true.
-        !   exit
-        ! end if
-        
       end do
     end subroutine compScheme
 
@@ -138,9 +131,6 @@ module primarycalcs
 
         Y2_fine(n_fine,k_fine+1) = ( (ReactionRate2_fine(n_fine,k_fine) &
         /(uStar(n_fine,k) )) * delta_x_Star_fine ) + Y2_fine(n_fine,k_fine)
-
-        ! Y1_fine(n_fine,k_fine+1) = Y1(n_fine,k)
-        ! Y2_fine(n_fine,k_fine+1) = Y2(n_fine,k)
 
         ! make sure mass fractions are not negative
         if (Y1_fine(n_fine,k_fine+1) < 0.0d0) then

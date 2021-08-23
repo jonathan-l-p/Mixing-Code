@@ -32,13 +32,7 @@ T_fine = readfromfortran('out_T_fine.bin',Ny,Nx);
 rhoStar_fine = readfromfortran('out_rhoStar_fine.bin',Ny,Nx);
 muStar_fine = readfromfortran('out_muStar_fine.bin',Ny,Nx);
 
-% Sirignano variables
-ybar = readfromfortran('out_ybar.bin',Ny,Nx);
-g_of_x = readfromfortran('out_g_of_x.bin',Ny,Nx);
-eta = readfromfortran('out_eta.bin',Ny,Nx);
-G_of_eta = readfromfortran('out_G_of_eta.bin',Ny,Nx);
-E = readfromfortran('out_E.bin',Ny,Nx);
-
+% scalar variables
 VarSave = readfromfortran('out_VarSave.bin',25,1);
 delta_x_star = VarSave(2);
 delta_y_star = VarSave(3);

@@ -8,15 +8,12 @@ module global
   character(len=*), parameter :: &
   OutPath = '/Users/jonathan/Documents/DataDump/out_Fortran/'
 
-  ! integer, parameter :: Nx = 160000
-  ! integer, parameter :: Ny = 853
-  ! integer, parameter :: Nx = 27500
-  ! integer, parameter :: Ny = 701
-  integer, parameter :: Nx = 40000
-  integer, parameter :: Ny = 427 ! 426
+  integer, parameter :: Nx = 1001
+  integer, parameter :: Ny = 100 ! 426
   integer, parameter :: Nx_fine = 10
-  ! integer, parameter :: Nx = 20000
-  ! integer, parameter :: Ny = 301
+  ! integer, parameter :: Nx = 40000
+  ! integer, parameter :: Ny = 427 ! 426
+  ! integer, parameter :: Nx_fine = 10
   integer, parameter :: x0ind = 1 ! ceiling(real(Nx)/7.d0) ! index of xStar where \kappa*_{\infinity}(x) switches from a constant to a function of 1 / sqrt{x}
 
   logical :: BuildMain = .true. ! logical variable to determine whether or not the run the main loop
@@ -54,8 +51,8 @@ module global
   real(dp) :: W2 = 0.044d0 ! molecular weight of fluid 2, [kg/mol]
 
   ! DO NOT EDIT parameters - - - - - - -
-  integer ::  k ! x-direction index integer for main loop
-  integer ::  k_fine ! fine x-direction index integer for main loop
+  integer :: k ! x-direction index integer for main loop
+  integer :: k_fine ! fine x-direction index integer for main loop
   integer :: n ! for going up and down
   integer :: Nx_ARRAY(1,1) = Nx
   integer :: Ny_ARRAY(1,1) = Ny
